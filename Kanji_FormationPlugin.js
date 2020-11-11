@@ -54,10 +54,6 @@
     let mainMemberDisplay = String(parameters['mainMemberDisplay'] || "■メインメンバー")
     let subMemberDisplay = String(parameters['subMemberDisplay'] || "■控えメンバー")
     let formationName = String(parameters['formationName'] || "並び替え")
-<<<<<<< HEAD
-=======
-    let _windowX, _windowY;
->>>>>>> origin/master
  
     //=====================================================================
     // 汎用関数集。戦闘とメニュー上で処理を統一するため外部での関数として定義
@@ -92,11 +88,7 @@
         let actor, j = 0, k = 0;
         for (let i = 0;actor = $gameParty.allMembers()[k];i++){
             base._parties[j][i] = actor._actorId;
-<<<<<<< HEAD
             if (k == $gameParty.maxBattleMembers_fix() - 1) { 
-=======
-            if (k == $gameParty.maxBattleMembers() - 1) { 
->>>>>>> origin/master
                 j++;
                 i = -1;
             };
@@ -155,7 +147,6 @@
     // Game_Party
     //=====================================================================
     Game_Party.prototype.maxBattleMembers = function () {
-<<<<<<< HEAD
         return 5;
     }
 
@@ -171,12 +162,6 @@
     };
 
 
-=======
-        this._partySize = this._partySize || 0;
-        return this._partySize;
-    }
- 
->>>>>>> origin/master
     const _Game_Party_setupStartingMembers = Game_Party.prototype.setupStartingMembers;
     Game_Party.prototype.setupStartingMembers = function() {
         _Game_Party_setupStartingMembers.call(this);
@@ -185,11 +170,7 @@
 
     const _Game_Party_addActor = Game_Party.prototype.addActor;
     Game_Party.prototype.addActor = function (actorId) {
-<<<<<<< HEAD
         if (!this._actors.contains(actorId) && this.maxBattleMembers_fix() < 5) {
-=======
-        if (!this._actors.contains(actorId) && this.maxBattleMembers() < 5) {
->>>>>>> origin/master
             this._partySize++;
         }
         _Game_Party_addActor.call(this, actorId);
@@ -197,11 +178,7 @@
  
     const _Game_Party_removeActor = Game_Party.prototype.removeActor;
     Game_Party.prototype.removeActor = function (actorId) {
-<<<<<<< HEAD
         if (this._actors.contains(actorId) && this.maxBattleMembers_fix() > 1) {
-=======
-        if (this._actors.contains(actorId) && this.maxBattleMembers() > 1) {
->>>>>>> origin/master
             this._partySize--;
         }
         _Game_Party_removeActor.call(this, actorId);
@@ -547,12 +524,9 @@
     };
  
     Scene_Battle.prototype.onFormationCancel = function () {
-<<<<<<< HEAD
         $gameParty.members().forEach(actor => {
             actor.makeActions();
         });
-=======
->>>>>>> origin/master
         this._mainWindow.close();
         this._subWindow.close();
         this._statusWindowKanji.close();
@@ -566,17 +540,10 @@
  
     const _Scene_Battle_update = Scene_Battle.prototype.update;
     Scene_Battle.prototype.update = function () {
-<<<<<<< HEAD
         if (this._charaSprite.opacity != 0) {
             this._charaSprite.opacity = 0;
         }
         _Scene_Battle_update.call(this);
-=======
-        _Scene_Battle_update.call(this);
-        if (this._charaSprite.opacity != 0) {
-            this._charaSprite.opacity = 0;
-        }
->>>>>>> origin/master
         updateMemberWindows(this)
     };
  
