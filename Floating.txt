@@ -1,0 +1,119 @@
+#==============================================================================
+# ■ 戦闘に岩石浮遊エフェクト追加　by 莞爾の草
+#------------------------------------------------------------------------------
+# 　バトル画面に岩石が浮遊するエフェクトを追加します。
+#==============================================================================
+=begin
+■ 使い方
+１．ゲームフォルダのGraphics内にParticleというフォルダを作る。
+
+２．Particleの中に画像ファイルを入れるフォルダを作る（自由に命名可能）。
+　　その中にindex(半角数字)と名付けたファイルを入れる。
+　　半角数字は0から始めてください。
+　例）index0.png、index1.png、index2.png...
+　　
+　　Graphics/Particle/Earth/index0.png
+　　ファイルのリンクがこんなふうになっていれば正常。
+
+３．作ったフォルダ内に浮遊させたい画像を入れる。
+　　作ったフォルダ内に入っている画像がランダムに選ばれます。
+
+=end
+
+module KS
+  FileNameVariable = 1 #画像ファイルの入っているフォルダ名を入れておく変数番号
+
+  FloatingOnSwitch = 1 #戦闘中に岩石を浮遊させるかを判定するスイッチ。
+                       #戦闘中にOFFにすると停止する。
+
+  GoingDown = 2 #岩石を落下させるかを判定するスイッチ。
+  
+  AdditionStop = 3 #パーティクルの生成を止めるかを判定するスイッチ。
+  
+  ParticleInfo = {
+  "Earth" => 6
+  }
+  #画像ファイルごとのパーティクルの数を入れる。
+  #サンプルファイルのEarthなら画像の数は6なので
+  #6と入れる。
+end
+
+module Cache
+  def self.particle(filename)
+    load_bitmap("Graphics/Particle/", filename)
+  end
+end
+
+class Spriteset_Battle
+  include KS
+  #--------------------------------------------------------------------------
+  # ● オブジェクト初期化
+  #--------------------------------------------------------------------------
+  alias k_initialize initialize
+  def initialize
+    create_particles
+    k_initialize
+  end
+  #--------------------------------------------------------------------------
+  # ● ビューポートの作成
+  #--------------------------------------------------------------------------
+  alias k_create_viewports create_viewports
+  def create_viewports
+    k_create_viewports
+    @viewport9 = Viewport.new
+    @viewport9.z = 50
+  end
+  #--------------------------------------------------------------------------
+  # ● パーティクルの作成
+  #--------------------------------------------------------------------------
+  def create_particles
+    @sprites=[]
+  end
+  #--------------------------------------------------------------------------
+  # ● スプライトの追加
+  #--------------------------------------------------------------------------
+  def add_sprite
+    file_name = $game_variables[FileNameVariable]
+    particle = ParticleInfo[file_name]
+    if particle
+      sprite = Sprite.new(@viewport9)
+      sprite.x=rand(Graphics.height+68)
+      sprite.y=$game_switches[GoingDown] ? -rand(600) : Graphics.height+rand(600)
+      sprite.bitmap = Cache.particle(file_name+"/index#{rand(particle)}")
+      @sprites.push(sprite)
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● フレーム更新
+  #--------------------------------------------------------------------------
+  alias k_update update
+  def update
+    k_update
+    @sprites.each do |sp|
+      if $game_switches[FloatingOnSwitch]
+        $game_switches[GoingDown] ?
+        sp.y > Graphics.height ? sp.dispose : sp.y += sp.height*3/4.00 :
+        sp.y < 0               ? sp.dispose : sp.y -= sp.height*1/3.00
+      end
+    end
+    @sprites.map! {|sprite| sprite.disposed? ? nil : sprite }
+    @sprites.compact!
+    if $game_switches[FloatingOnSwitch] && !$game_switches[AdditionStop]
+      (sprite_max - @sprites.size).times {add_sprite}
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● スプライトの最大数を取得
+  #--------------------------------------------------------------------------
+  def sprite_max
+    return 18
+  end
+  #--------------------------------------------------------------------------
+  # ● 解放
+  #--------------------------------------------------------------------------
+  alias k_dispose dispose
+  def dispose
+    @sprites.each {|sprite| sprite.dispose }
+    k_dispose
+  end
+end

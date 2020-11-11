@@ -1,0 +1,57 @@
+# ver.1.00 no copyright
+# BGM
+%w{
+  Airship  Battle1  Battle2  Battle3  Battle4 
+  Battle5  Battle6  Battle7  Battle8  Battle9
+  Dungeon1 Dungeon2 Dungeon3 Dungeon4 Dungeon5 Dungeon6 
+  Dungeon7 Dungeon8 Dungeon9 
+  Field1 Field2 Field3 Field4
+  Scene1 Scene2 Scene3 Scene4 Scene5 Scene6
+  Ship   Theme1 Theme2 Theme3 Theme4 Theme5
+  Town1  Town2  Town3  Town4  Town5  Town6 Town7
+}
+
+#BGS
+%w{ Clock Darkness Drips Fire Quake Rain River Sea Storm Wind }
+
+#ME
+%w{ Fanfare1 Fanfare2 Fanfare3 Gag Gameover1 Gameover2
+  Inn Item Mystery  Organ  Shock Victory1  Victory2 }
+
+#SE
+%w{
+  Absorb1 Absorb2 Applause1 Applause2 Attack1 Attack2 Attack3
+  Autodoor Barrier Battle1 Battle2 Battle3 Bell1 Bell2 Bell3 Bite
+  Blind Blow1 Blow2 Blow3 Blow4 Blow5 Blow6 Blow7 Blow8 Book1 Book2
+  Bow1 Bow2 Bow3 Bow4 Break Breath Buzzer1 Buzzer2 Cancel1 Cancel2
+  Cat Chest Chicken Chime1 Chime2 Close1 Close2 Close3 Coin
+  Collapse1 Collapse2 Collapse3 Collapse4 Confuse Cow Crash
+  Crossbow Crow Cry1 Cry2 Cursor1 Cursor2 Damage1 Damage2 Damage3 
+  Damage4 Damage5 Darkness1 Darkness2 Darkness3 Darkness4 Darkness5
+  Darkness6 Darkness7 Darkness8 Decision1 Decision2 Decision3
+  Devil1 Devil2 Devil3 Disappointment Dive Dog Down1 Down2 Down3 Down4
+  Earth1 Earth2 Earth3 Earth4 Earth5 Earth6 Earth7 Earth8 Earth9
+  Equip1 Equip2 Equip3 Evasion1 Evasion2 Explosion1 Explosion2
+  Explosion3 Explosion4 Explosion5 Explosion6 Explosion7 Fall 
+  Fire1  Fire2  Fire3  Fire4 Fire5 Fire6 Fire7 Fire8 Fire9
+  Flash1 Flash2 Flash3 Fog1  Fog2  Frog  Gun1  Gun2  Hammer
+  Heal1 Heal2 Heal3 Heal4 Heal5 Heal6 Heal7 Horse
+  Ice1  Ice2  Ice3  Ice4  Ice5  Ice6 Ice7  Ice8  Ice9 Ice10  Ice11
+  Item1 Item2 Item3 Jump1 Jump2 Key  Knock Laser Load Machine
+  Magic1 Magic2 Magic3 Magic4 Magic5 Magic6 Magic7 Miss
+  Monster1 Monster2 Monster3 Monster4 Monster5 Monster6 Monster7
+  Move  Open1 Open2  Open3  Open4   Open5 Paralyze1 Paralyze2 Paralyze3
+  Parry Phone Poison Pollen Powerup Push  Raise1    Raise2    Raise3
+  Recovery Reflection Resonance Run Saint1 Saint2 Saint3 Saint4
+  Saint5 Saint6 Saint7 Saint8 Saint9 Sand Save Scream Sheep
+  Shop Shot1 Shot2 Shot3 Silence Skill1 Skill2 Skill3
+  Slash1 Slash2 Slash3 Slash4  Slash5  Slash6 
+  Slash7 Slash8 Slash9 Slash10 Slash11 Slash12
+  Sleep  Sound1 Sound2 Sound3 Stare  Starlight Switch1 Switch2 Switch3
+  Sword1 Sword2 Sword3 Sword4 Sword5 Teleport 
+  Thunder1 Thunder2 Thunder3 Thunder4  Thunder5  Thunder6
+  Thunder7 Thunder8 Thunder9 Thunder10 Thunder11 Thunder12
+  Twine Up1 Up2 Up3 Up4 Water1 Water2 Water3 Water4 Water5 Water6
+  Wind1 Wind2 Wind3 Wind4  Wind5  Wind6 
+  Wind7 Wind8 Wind9 Wind10 Wind11 Wolf
+}

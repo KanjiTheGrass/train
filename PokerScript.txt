@@ -1,0 +1,1850 @@
+#==============================================================================
+# ■ 対戦ポーカースクリプト　Version 0.01　by 莞爾の草
+#------------------------------------------------------------------------------
+# 　１対１の対戦型ポーカースクリプトです。
+#==============================================================================
+=begin
+
+ 【注意】
+ １．本スクリプトはジョーカーには対応していません。
+ ２．ポーカーに詳しくない人間が作ったので、もしかしたら間違っている点が
+ 　　あるかもしれません。
+ ３．敵の強さや敵のチップなどの設定はできません。
+ ４．もし何かしらの問題があった場合は何なりとお申し付けください。
+ 　　土下座してお詫びに伺います。
+ ５．トランプの画像は無料素材倶楽部様から提供された素材です。
+ 　　絶対にこのプロジェクトからコピペせずに無料素材倶楽部様のサイト
+ 　　（http://sozai.7gates.net/docs/trump/）からDLしてください。
+ 　　もし不正が見つかった場合は本素材の公開停止および全面的な利用禁止
+ 　　を行います（それ以外のカーソルの素材などは自作なのでフリーです）。
+
+ 【必要なこと】
+ １．Graphicsフォルダの中にPokerというファイルを作ってください。
+ ２．その中にトランプの画像（詳細↓）を用意してください
+ ※トランプの画像の名前は必ずc01というような、マークの頭文字＋
+ 　カードの数字番号（一桁の場合は１０の位に０をつける）で構成された
+ 　ファイル名をつけてください。
+ 　クローバーがcでダイアがd、ハートがhでスペードがsです。
+ ※推奨するサイズは80*120です。Vocabに設定されているPokerCardsImageZoomで
+　 カードの拡大率を調整できます。
+ ３．カード選択時に必要なカーソルと、トランプの裏面の画像を用意してください。
+ 　　カーソルのファイル名はcursor、裏面トランプの画像はz02という名前を付けてください。
+
+ 【始め方】
+ １．イベントスクリプトにcall_poker(name,face_name,face_index,ante,bgm)
+ 　　と入力します（nameはポーカー中に表示する敵の名前、face_nameは
+ 　　顔グラの名前、face_indexは顔グラのindex。bgmは戦闘中に流す
+ 　　BGMです。BGMが入力されていない場合は"Battle5"が流れます）。
+ 　　Anteはゲーム開始時に払うアンティです。
+=end
+
+#--------------------------------------------------------------------------
+# ● 用語集
+#--------------------------------------------------------------------------
+module Vocab
+  Prizes=["Ｒ．Ｓ．フラッシュ","Ｓ．フラッシュ",
+  "フォアカード","フルハウス","フラッシュ","ストレート",
+  "スリーカード","ツーペア","ワンペア","ノーカード"]
+  
+  PokerUseTip=true #所持金の代わりにチップを使うか？
+  
+  PokerVariableForTip=1 #チップ額を格納する変数。PokerUseTipがtrueのときに使う
+  
+  PokerCardsImageZoom=0.4 #トランプの画像の拡大率。
+  
+  PokerUnit=PokerUseTip ? "枚" : "円"
+  
+  PokerLittleMoney=PokerUseTip ? "チップが足りません……。" : "お金が足りません……。"
+
+  PokerRaise="%sは%s"+sprintf("%sレイズした！",PokerUnit)
+
+  PokerCall ="%sは%s"+sprintf("%sコールした！",PokerUnit)
+
+  PokerCheck="%sはチェックでこの場を流した！"
+
+  PokerUncallable="コールできません。"
+
+  PokerUnraisable="レイズの額はコールの額を超えている必要があります。"
+
+  PokerRaiseValue="レイズする額を決めてください。"
+
+  PokerAnte="アンティとして%s"+sprintf("%sを支払った！",PokerUnit)
+
+  PokerPot="ポット"
+  
+  PokerBidValue="ビッドする額を決めてください。"
+
+  PokerBidOK="%sは%s"+sprintf("%sビッドした！",PokerUnit)
+
+  PokerBidPass="%sはビッドをパスした！"
+
+  PokerDrop="ドロップしました……"
+
+  PokerContinue="ゲームを続けますか？"
+
+  PokerChoose="変えるカードを選んでください。交換開始はBボタン。"
+
+  PokerEnemyDrop="%sがドロップしました……"
+  
+  PokerVocabs=["ビッド","パス","コール","レイズ","チェック","ドロップ"]
+
+  PokerWantToDrop=["はい","いいえ"]
+
+  PokerNoChange="NO CHANGE"
+
+  PokerOPEN="OPEN"
+  
+  PokerActorDraw="Your Draw Time"
+  
+  PokerEnemyDraw="Enemy's Draw Time"
+  
+  PokerBettinground="Betting Round"
+  
+  PokerFirst="あなたは先攻です。"
+  
+  PokerSecond="あなたは後攻です。"
+
+  PokerFirstSelect="カードを一つ選んでください。"
+
+end
+module Cache
+  #--------------------------------------------------------------------------
+  # ● アニメーション グラフィックの取得
+  #--------------------------------------------------------------------------
+  def self.poker(filename)
+    load_bitmap("Graphics/Poker/", filename)
+  end
+end
+
+#==============================================================================
+# ■ Window_PokerGold
+#------------------------------------------------------------------------------
+# 　所持金かチップを表示するウィンドウです。
+#==============================================================================
+
+class Window_PokerGold < Window_Gold
+  #--------------------------------------------------------------------------
+  # ● 所持金の取得
+  #--------------------------------------------------------------------------
+  def value
+    Vocab::PokerUseTip ? $game_variables[Vocab::PokerVariableForTip] : $game_party.gold
+  end
+  #--------------------------------------------------------------------------
+  # ● 通貨単位の取得
+  #--------------------------------------------------------------------------
+  def currency_unit
+    Vocab::PokerUnit
+  end
+end
+
+#==============================================================================
+# ■ Scene_Battle
+#------------------------------------------------------------------------------
+# 　バトル画面の処理を行うクラスです。
+#==============================================================================
+
+class Scene_BeforePoker < Scene_MenuBase
+  def play_card;Audio.se_play("Audio/SE/Wind7");end
+  #--------------------------------------------------------------------------
+  # ● 開始処理
+  #--------------------------------------------------------------------------
+  def start
+    super
+    @reverse={}
+    @index=0
+    @now=0
+    @x_now=0
+    @two_cards=[]
+    @cards_display=[]
+    @cursor=Sprite.new
+    @cursor.z=500
+    @cursor.bitmap=Cache.poker("cursor")
+    @cursor.ox,@cursor.oy=@cursor.width/2,@cursor.height/2
+    @cursor.visible=false
+    make_cards
+    create_help_window
+    Graphics.transition(30)
+    Graphics.wait(30)
+    create_two_cards
+  end
+  #--------------------------------------------------------------------------
+  # ● ヘルプウィンドウの作成
+  #--------------------------------------------------------------------------
+  def create_help_window
+    @help_window=Window_Help.new(1)
+    @help_window.openness=0
+    @help_window.z=1900
+  end
+  #--------------------------------------------------------------------------
+  # ● 準備
+  #--------------------------------------------------------------------------
+  def prepare(name,face_name,face_index,ante,bgm)
+    Audio.bgm_play("Audio/BGM/"+bgm)
+    @prepare=[name,face_name,face_index,ante]
+  end
+  #--------------------------------------------------------------------------
+  # ● 二枚のカード
+  #--------------------------------------------------------------------------
+  def create_two_cards
+    @help_window.set_text(Vocab::PokerFirstSelect)
+    @help_window.open
+    2.times{add_card}
+    @cursor.visible=true
+  end
+  #--------------------------------------------------------------------------
+  # ● アクターのカードをひっくり返す
+  #--------------------------------------------------------------------------
+  def a_turn_card(index)
+    play_card
+    3.times do |i|
+      @cards_display[index].zoom_x=1/(i.to_f+1)*Vocab::PokerCardsImageZoom
+      Graphics.update
+    end
+    @reverse[index]^=true
+    if @reverse[index]
+      @cards_display[index].bitmap=Cache.poker(@two_cards[index])
+    else
+      @cards_display[index].bitmap=Cache.poker("z02")
+    end
+    3.downto(1) do |i|
+      @cards_display[index].zoom_x=1/i.to_f*Vocab::PokerCardsImageZoom
+      update
+    end
+    @cursor.visible=false
+    after_that unless @a
+  end
+  #--------------------------------------------------------------------------
+  # ● マークを読み取る
+  #--------------------------------------------------------------------------
+  def card_mark(cards)
+    case cards[0]
+    when "s";a=4
+    when "h";a=3
+    when "d";a=2
+    when "c";a=1
+    end
+    return a
+  end
+  #--------------------------------------------------------------------------
+  # ● カードの数字だけ読み込む
+  #--------------------------------------------------------------------------
+  def card_number(cards)
+    cards=~ /[^x](\d+)/
+    return 0 unless $1
+    i = $1.to_i
+    i+=13 if i <= 1
+    i
+    return i
+  end
+  #--------------------------------------------------------------------------
+  # ● その後
+  #--------------------------------------------------------------------------
+  def after_that
+    @a=true
+    a_turn_card(@index-1)
+    case card_number(@two_cards[@index]) <=> card_number(@two_cards[@index-1])
+    when 1;win
+    when 0
+      case card_mark(@two_cards[@index]) <=> card_mark(@two_cards[@index-1])
+      when 1;win
+      when -1;lose
+      end
+    when -1;lose
+    end
+    @help_window.open
+    Input.update
+    while !Input.trigger?(:C)
+      update
+    end
+    @help_window.close
+    while @help_window.openness !=0
+      update
+    end
+    delele_card(@index)
+    delele_card(@index-1)
+    6.times{update}
+    SceneManager.call(Scene_Poker)
+    SceneManager.scene.prepare(*@prepare,@actor_first)
+  end
+  #--------------------------------------------------------------------------
+  # ● アクター先攻
+  #--------------------------------------------------------------------------
+  def win
+    @help_window.set_text(Vocab::PokerFirst)
+    @actor_first=false
+  end
+  #--------------------------------------------------------------------------
+  # ● アクター後攻
+  #--------------------------------------------------------------------------
+  def lose
+    @help_window.set_text(Vocab::PokerSecond)
+    @actor_first=true
+  end
+  #--------------------------------------------------------------------------
+  # ● カードを下げる
+  #--------------------------------------------------------------------------
+  def delele_card(num)
+    play_card
+    @cards[num]=nil
+    5.times do |i|
+      a=@index==num ? 30 : -30
+      @cards_display[num].y+=a
+      update
+    end
+    @cards_display[num].dispose
+    @cards_display[num]=nil
+  end
+  #--------------------------------------------------------------------------
+  # ● アップデート
+  #--------------------------------------------------------------------------
+  def update
+    super
+    if @cursor.visible
+      @now+=1
+      if @cursor.x != @new_x
+        @cursor.x=@old_x+(@new_x-@old_x)*@x_now/5
+        @x_now+=1
+      end
+      @x_now=0 if @cursor.x == @new_x
+
+    @cards_display.each_with_index{|i,w|
+      a=0
+      a=-15 if @index==w
+      i.y=110+a}
+
+    last_index = @index
+    if Input.repeat?(:RIGHT)
+      @index+=1
+      @index=0 if @index==@two_cards.size
+    elsif Input.repeat?(:LEFT)
+      @index-=1
+      @index=@two_cards.size-1 if @index==-1
+    elsif Input.trigger?(:C)
+      a_turn_card(@index)
+    end
+    
+    if @index != last_index
+      Sound.play_cursor if @index != -1
+      @old_x=194+160*[last_index,0].max
+      @new_x=194+160*[@index,0].max
+    end
+    @cursor.y=110+3*Math.sin(Math::PI * @now/60)
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● カードを加える
+  #--------------------------------------------------------------------------
+  def add_card
+    Audio.se_play("Audio/SE/Wind7")
+    b=select_card
+    @two_cards+=[b]
+    @num=@cards_display.size
+    @reverse[@num]=false
+    @cards_display[@num]=Sprite.new
+    @cards_display[@num].bitmap=Cache.poker("z02")
+    @cards_display[@num].zoom_x=Vocab::PokerCardsImageZoom
+    @cards_display[@num].zoom_y=@cards_display[@num].zoom_x
+    @cards_display[@num].ox=@cards_display[@num].width/2
+    @cards_display[@num].x=544
+    @cards_display[@num].y=290
+    5.downto(1) do |i|
+      c=110
+      @cards_display[@num].x=194+160*@num
+      @cards_display[@num].y=(Graphics.height-c)/5*i+c
+      update
+    end
+    @old_x=194+160*0
+    @new_x=@old_x
+  end
+  #--------------------------------------------------------------------------
+  # ● カードの生成
+  #--------------------------------------------------------------------------
+  def make_cards
+    c=Array.new(13) {|i| sprintf("c%02d",i+1) }
+    d=Array.new(13) {|i| sprintf("d%02d",i+1) }
+    s=Array.new(13) {|i| sprintf("s%02d",i+1) }
+    h=Array.new(13) {|i| sprintf("h%02d",i+1) }
+    @cards=c+d+s+h
+  end
+  #--------------------------------------------------------------------------
+  # ● カードを取る
+  #--------------------------------------------------------------------------
+  def select_card
+    a=@cards.sample
+    @cards-=[a]
+    return a
+  end
+end
+
+
+
+  #--------------------------------------------------------------------------
+  # ● ベットかドロップか
+  #--------------------------------------------------------------------------
+class Window_Bit_or_Pass < Window_HorzCommand
+  #--------------------------------------------------------------------------
+  # ● オブジェクト初期化
+  #--------------------------------------------------------------------------
+  def initialize
+    super(0, Graphics.height-166)
+    self.openness=0
+    deactivate
+  end
+  def window_width
+    Graphics.width
+  end
+  def close
+    super
+    select(0)
+  end
+  #--------------------------------------------------------------------------
+  # ● 桁数の取得
+  #--------------------------------------------------------------------------
+  def col_max
+    return 3
+  end
+  #--------------------------------------------------------------------------
+  # ● コマンドリストの作成
+  #--------------------------------------------------------------------------
+  def make_command_list
+    add_command(Vocab::PokerVocabs[0], :bid)
+    add_command(Vocab::PokerVocabs[1],   :pass)
+    add_command(Vocab::PokerVocabs[5],:drop)
+  end
+end
+
+  #--------------------------------------------------------------------------
+  # ● コール・レイズ・ドロップ
+  #--------------------------------------------------------------------------
+class Window_Call < Window_Bit_or_Pass
+  #--------------------------------------------------------------------------
+  # ● 桁数の取得
+  #--------------------------------------------------------------------------
+  def col_max
+    return 4
+  end
+  #--------------------------------------------------------------------------
+  # ● コマンドリストの作成
+  #--------------------------------------------------------------------------
+  def make_command_list
+    add_command(Vocab::PokerVocabs[2], :call)
+    add_command(Vocab::PokerVocabs[3],:raise)
+    add_command(Vocab::PokerVocabs[4],:check)
+    add_command(Vocab::PokerVocabs[5],:drop)
+  end
+end
+
+
+class Window_Yes_or_No < Window_Command
+  #--------------------------------------------------------------------------
+  # ● オブジェクト初期化
+  #--------------------------------------------------------------------------
+  def initialize
+    super(0, 0)
+    update_placement
+    self.openness=0
+    deactivate
+  end
+  #--------------------------------------------------------------------------
+  # ● ウィンドウ幅の取得
+  #--------------------------------------------------------------------------
+  def window_width
+    return 160
+  end
+  #--------------------------------------------------------------------------
+  # ● ウィンドウ位置の更新
+  #--------------------------------------------------------------------------
+  def update_placement
+    self.x = (Graphics.width - width) / 2
+    self.y = (Graphics.height - height) / 2
+  end
+  #--------------------------------------------------------------------------
+  # ● コマンドリストの作成
+  #--------------------------------------------------------------------------
+  def make_command_list
+    add_command(Vocab::PokerWantToDrop[0], :yes)
+    add_command(Vocab::PokerWantToDrop[1],   :no)
+  end
+end
+
+
+#==============================================================================
+# ■ Window_NumberInput
+#------------------------------------------------------------------------------
+# 　イベントコマンド［数値入力の処理］に使用するウィンドウです。
+#==============================================================================
+
+class Window_GoldInput < Window_NumberInput
+  attr_accessor :ok
+  attr_accessor :number
+  attr_accessor :betting
+  #--------------------------------------------------------------------------
+  # ● オブジェクト初期化
+  #--------------------------------------------------------------------------
+  def initialize(message_window)
+    super(message_window)
+    @number = 1
+    @digits_max = 4
+    @index = 0
+    @betting=0
+    @x_now=0
+    @ok=false
+    self.openness = 255
+    deactivate
+  end
+  #--------------------------------------------------------------------------
+  # ● 所持金：チップ
+  #--------------------------------------------------------------------------
+  def gold
+    Vocab::PokerUseTip ? $game_variables[Vocab::PokerVariableForTip] : $game_party.gold
+  end
+  #--------------------------------------------------------------------------
+  # ● 決定ボタンが押されたときの処理
+  #--------------------------------------------------------------------------
+  def process_ok
+    if @number>gold
+      Sound.play_buzzer
+    else
+      Sound.play_ok
+      deactivate
+      @ok=true
+      close
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● 入力処理の開始
+  #--------------------------------------------------------------------------
+  def start
+    update_placement
+    create_contents
+    refresh
+    open
+    activate
+  end
+  #--------------------------------------------------------------------------
+  # ● ウィンドウ位置の更新
+  #--------------------------------------------------------------------------
+  def update_placement
+    self.width = @digits_max * 20 + padding * 2
+    self.height = fitting_height(1)
+    self.x = (Graphics.width - width) / 2
+    self.y = 200
+  end
+  #--------------------------------------------------------------------------
+  # ● 数字の変更処理
+  #--------------------------------------------------------------------------
+  def process_digit_change
+    return unless active
+    if Input.repeat?(:UP) || Input.repeat?(:DOWN)
+      Sound.play_cursor
+      place = 10 ** (@digits_max - 1 - @index)
+      n = @number / place % 10
+      @number -= n * place
+      n = (n + 1) % 10 if Input.repeat?(:UP)
+      n = (n + 9) % 10 if Input.repeat?(:DOWN)
+      @number += n * place
+      @number=[@number,gold].min
+      @number=1 if @number==0
+      refresh
+    end
+  end
+end
+
+
+#==============================================================================
+# ■ Scene_Battle
+#------------------------------------------------------------------------------
+# 　バトル画面の処理を行うクラスです。
+#==============================================================================
+
+class Scene_Poker < Scene_Base
+  #--------------------------------------------------------------------------
+  # ● トランジション速度の取得
+  #--------------------------------------------------------------------------
+  def transition_speed
+    return 60
+  end
+  def play_card;Audio.se_play("Audio/SE/Wind7");end
+  #--------------------------------------------------------------------------
+  # ● 開始処理
+  #--------------------------------------------------------------------------
+  def start
+    super
+    @@turn_program=[nil,:bet,:call,:call,:call,:change,:change,:bet,:call,:open]
+    create_background
+    create_spriteset
+  end
+  #--------------------------------------------------------------------------
+  # ● 背景の作成
+  #--------------------------------------------------------------------------
+  def create_background
+    @background_sprite = Sprite.new
+    @background_sprite.z=-20
+    @background_sprite.bitmap = SceneManager.background_bitmap
+    @background_sprite.color.set(16, 16, 16, 128)
+  end
+  #--------------------------------------------------------------------------
+  # ● 準備
+  #--------------------------------------------------------------------------
+  def prepare(name,face_name,face_index,ante,first)
+    @actors_turn=first
+    @enemy_name=name
+    @antevalue=ante
+    @enemy_faceinfo=[face_name,face_index]
+  end
+  #--------------------------------------------------------------------------
+  # ● スプライトセットの作成
+  #--------------------------------------------------------------------------
+  def create_spriteset
+    initialize_variables
+    create_message_window
+    create_help_window
+    create_face_windows
+    create_gold_window
+    create_cards_stack
+    create_input_window
+    create_cursor
+    create_bet_window
+    create_poker_window
+    create_bid_or_pass
+    create_call_window
+    create_yes_or_no
+    create_count_sprite
+    create_sprite_for_screenshot
+    create_text_sprite
+    Graphics.transition(30)
+    Graphics.wait(30)
+    game_set
+  end
+  #--------------------------------------------------------------------------
+  # ● 変数等の初期化
+  #--------------------------------------------------------------------------
+  def initialize_variables
+    @now,@x_now=0,0
+    @reverse={}
+    @e_reverse={}
+    @actor=[]
+    @enemy=[]
+    @a_display=[]
+    @e_display=[]
+    @now=0
+    @betting=0
+  end
+  #--------------------------------------------------------------------------
+  # ● yes_or_noウィンドウ作成
+  #--------------------------------------------------------------------------
+  def create_yes_or_no
+    @yes_or_no=Window_Yes_or_No.new
+    @yes_or_no.z=1900
+    @yes_or_no.set_handler(:yes, method(:yes))
+    @yes_or_no.set_handler(:no, method(:no))
+  end
+  #--------------------------------------------------------------------------
+  # ● Bid or Passウィンドウ作成
+  #--------------------------------------------------------------------------
+  def create_bid_or_pass
+    @bid_or_pass=Window_Bit_or_Pass.new
+    @bid_or_pass.set_handler(:bid, method(:bid))
+    @bid_or_pass.set_handler(:pass, method(:pass))
+    @bid_or_pass.set_handler(:drop, method(:drop))
+  end
+  #--------------------------------------------------------------------------
+  # ● コールウィンドウ作成
+  #--------------------------------------------------------------------------
+  def create_call_window
+    @call=Window_Call.new
+    @call.set_handler(:call, method(:call))
+    @call.set_handler(:raise, method(:raise))
+    @call.set_handler(:check, method(:check))
+    @call.set_handler(:drop, method(:drop))
+  end
+  #--------------------------------------------------------------------------
+  # ● カーソル作成
+  #--------------------------------------------------------------------------
+  def create_cursor
+    @cursor=Sprite.new
+    @cursor.x=990
+    @cursor.z=350
+    @cursor.bitmap=Cache.poker("cursor")
+    @cursor.ox,@cursor.oy=@cursor.width/2,@cursor.height/2
+    @cursor.visible=false
+    @card_index=-1
+    @old_x=(@cards_pic.x-46)/5+46+39
+    @new_x=@old_x
+  end
+  #--------------------------------------------------------------------------
+  # ● ポーカーウィンドウの作成
+  #--------------------------------------------------------------------------
+  def create_poker_window
+    @poker_text = Window_Base.new(@actor_face.width,@gold_window.y,
+    Graphics.width-@actor_face.width-@gold_window.width,@gold_window.height)
+  end
+  #--------------------------------------------------------------------------
+  # ● インプットウィンドウの作成
+  #--------------------------------------------------------------------------
+  def create_input_window
+    @input = Window_GoldInput.new(@message_window)
+    @input.z=500
+  end
+  #--------------------------------------------------------------------------
+  # ● ベットウィンドウの作成
+  #--------------------------------------------------------------------------
+  def create_bet_window
+    @betting=Window_Base.new((Graphics.width-@gold_window.width)/2,
+    (Graphics.height-@gold_window.height*2)/2,@gold_window.width,@gold_window.height*2)
+    update_betting
+  end
+  #--------------------------------------------------------------------------
+  # ● メッセージウィンドウの作成
+  #--------------------------------------------------------------------------
+  def create_message_window
+    @message_window = Window_Message.new
+    @message_window.z=999
+  end
+  #--------------------------------------------------------------------------
+  # ● ゴールドウィンドウの作成
+  #--------------------------------------------------------------------------
+  def create_gold_window
+    @gold_window = Window_PokerGold.new      
+    @gold_window.x=Graphics.width-@gold_window.width
+    @gold_window.y=Graphics.height-@gold_window.height
+    @gold_window.z=999
+  end
+  #--------------------------------------------------------------------------
+  # ● 所持金：チップ
+  #--------------------------------------------------------------------------
+  def gold
+    Vocab::PokerUseTip ? $game_variables[Vocab::PokerVariableForTip] : $game_party.gold
+  end
+  #--------------------------------------------------------------------------
+  # ● 所持金：チップを得る
+  #--------------------------------------------------------------------------
+  def gain_gold(gold)
+    Vocab::PokerUseTip ? $game_variables[Vocab::PokerVariableForTip]+=gold : $game_party.lose_gold(gold)
+  end
+  #--------------------------------------------------------------------------
+  # ● 所持金：チップを失う
+  #--------------------------------------------------------------------------
+  def lose_gold(gold)
+    Vocab::PokerUseTip ? $game_variables[Vocab::PokerVariableForTip]-=gold : $game_party.lose_gold(gold)
+  end
+  #--------------------------------------------------------------------------
+  # ● ヘルプウィンドウの作成
+  #--------------------------------------------------------------------------
+  def create_help_window
+    @help_window=Window_Help.new(1)
+    @help_window.openness=0
+    @help_window.z=1900
+  end
+  #--------------------------------------------------------------------------
+  # ● アクターとエネミーの顔グラウィンドウの作成
+  #--------------------------------------------------------------------------
+  def create_face_windows
+    @actor_name=$game_party.battle_members[0].name
+    height=116
+    @actor_face = Window_Base.new(0,Graphics.height-height,*[height]*2)
+    @enemy_face = Window_Base.new(Graphics.width-height,0,*[height]*2)
+    @actor_face.draw_actor_face($game_party.battle_members[0],0,0)
+    @enemy_face.draw_face(*@enemy_faceinfo,0,0)
+    rect=[-11,-48,@enemy_face.width,@enemy_face.height]
+    @actor_face.draw_text(*rect,@actor_name,1)
+    @enemy_face.draw_text(*rect,@enemy_name,1)
+  end
+  #--------------------------------------------------------------------------
+  # ● カードの山のスプライトの作成
+  #--------------------------------------------------------------------------
+  def create_cards_stack
+    @cards_pic=Sprite.new
+    @cards_pic.bitmap=Cache.poker("cards")
+    @cards_pic.x=Graphics.width-110
+    @cards_pic.y=124
+    @cards_pic.z=-19
+  end
+  #--------------------------------------------------------------------------
+  # ● スクリーンショットのためのスプライトの作成
+  #--------------------------------------------------------------------------
+  def create_sprite_for_screenshot
+    @screen_shot = Sprite.new
+    @screen_shot.z=1899
+  end
+  #--------------------------------------------------------------------------
+  # ● テキスト表示スプライトの作成
+  #--------------------------------------------------------------------------
+  def create_text_sprite
+    @text = Sprite.new
+    @text.x=Graphics.width/2
+    @text.ox,@text.oy=@text.x,@text.y
+    @text.bitmap = Bitmap.new(544,416)
+    @text.z=900
+    @text.bitmap.font.size=50
+    @text.bitmap.font.shadow=true
+    @text.bitmap.font.bold=true
+    @text.bitmap.font.color = Color.new(255,255,0)
+    @text.bitmap.font.name="Arial"
+  end
+  #--------------------------------------------------------------------------
+  # ● カウント用のスプライトの作成
+  #--------------------------------------------------------------------------
+  def create_count_sprite
+    @str = Sprite.new
+    @str.bitmap = Bitmap.new(544,416)
+    @str.x,@str.y=Graphics.width/2,Graphics.height/2
+    @str.ox,@str.oy=@str.x,@str.y
+    @str.z=1900
+    @str.bitmap.font.size=90
+    @str.bitmap.font.shadow=true
+    @str.bitmap.font.bold=true
+    @str.bitmap.font.color = Color.new(*[255]*3)
+    @str.bitmap.font.name="Arial"
+  end
+  #--------------------------------------------------------------------------
+  # ● テキスト表示
+  #--------------------------------------------------------------------------
+  def text_display(str,a_or_e,clear=true)
+    @text.opacity=255
+    if clear
+      @text.bitmap.font.color = Color.new(255,255,0)
+      @text.bitmap.font.name="Arial"
+    else
+      @text.bitmap.font.color = Color.new(255,255,255)
+      @text.bitmap.font.name=Font.default_name
+    end
+    case a_or_e
+    when :a
+      d=-120
+    when :e
+      d=120
+    end
+    rect=@text.bitmap.rect
+    rect.y-=d
+    @text.bitmap.draw_text(rect,str,1)
+    30.times {|i| update}
+    if clear
+      15.downto(1) do |i|
+        @text.opacity-=20
+        update
+      end
+      @text.bitmap.clear
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● カウント表示
+  #--------------------------------------------------------------------------
+  def count(str)
+    @str.bitmap.draw_text(@str.bitmap.rect,str,1)
+    10.downto(1) do |i|
+      @str.zoom_x=i**1.8
+      @str.zoom_y=@str.zoom_x
+      update
+    end
+    50.downto(1) do |i|
+      @str.zoom_x-=0.01
+      @str.zoom_y=@str.zoom_x
+      update
+    end
+    @str.bitmap.clear
+  end
+  #--------------------------------------------------------------------------
+  # ● ポットに送る
+  #--------------------------------------------------------------------------
+  def send_pot(gold)
+    @input.betting+=gold
+    lose_gold(gold)
+    @gold_window.refresh
+    update_betting
+  end
+  #--------------------------------------------------------------------------
+  # ● エネミーがポットに送る
+  #--------------------------------------------------------------------------
+  def enemy_send_pot(gold)
+    @input.betting+=gold
+    update_betting
+  end
+  #--------------------------------------------------------------------------
+  # ● コール
+  #--------------------------------------------------------------------------
+  def call
+    if @for_call > gold
+      Audio.se_play("Audio/SE/Buzzer1")
+      @help_window.set_text(Vocab::PokerUncallable)
+      @help_window.open
+      while !Input.trigger?(:C)
+        update
+      end
+        @help_window.close
+      @call.activate
+    else
+    Audio.se_play("Audio/SE/coin")
+    send_pot(@for_call)
+    @help_window.set_text(sprintf(Vocab::PokerCall,@actor_name,@for_call))
+    help_input
+    next_turn
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● チェック
+  #--------------------------------------------------------------------------
+  def check
+    @actor_bet=0
+    @help_window.set_text(sprintf(Vocab::PokerCheck,@actor_name))
+    help_input
+    next_turn
+  end
+  #--------------------------------------------------------------------------
+  # ● レイズ
+  #--------------------------------------------------------------------------
+  def raise
+    if @for_call >= gold
+      Audio.se_play("Audio/SE/Buzzer1")
+      @help_window.set_text(Vocab::PokerUnraisable)
+      @help_window.open
+      while !Input.trigger?(:C)
+        update_basic
+      end
+        @help_window.close
+      @call.activate
+    else
+    loop do
+      @help_window.set_text(Vocab::PokerRaiseValue)
+      @help_window.open
+      @input.start
+      while !@input.ok
+        update
+      end
+      if @for_call >= @input.number
+        Audio.se_play("Audio/SE/Buzzer1")
+        @help_window.set_text(Vocab::PokerUnraisable)
+        @help_window.open
+        while !Input.trigger?(:C)
+          update_basic
+        end
+        @help_window.close
+        @input.number=0
+        @input.ok=false
+      else
+        break
+      end
+    end
+
+    Audio.se_play("Audio/SE/coin")
+    Audio.se_play("Audio/SE/Wind2")
+    raise=@input.number
+    @actor_bet=raise
+    @for_call=raise
+    send_pot(raise)
+    @help_window.set_text(sprintf(Vocab::PokerRaise,@actor_name,raise))
+    help_input
+    @input.ok =false
+    next_turn
+  end
+  end
+  #--------------------------------------------------------------------------
+  # ● ゲームの準備
+  #--------------------------------------------------------------------------
+  def game_set
+    @turn=0
+    @for_call=0
+    @input.betting=0
+    @a_change_times=0
+    @actor_bet=0
+    update_betting
+
+    if gold < 10
+      @help_window.set_text(Vocab::PokerLittleMoney)
+      help_input
+      no
+    else
+      Audio.se_play("Audio/SE/coin")
+      send_pot(@antevalue)
+      enemy_send_pot(@antevalue)
+      @help_window.set_text(sprintf(Vocab::PokerAnte,@antevalue))
+      help_input
+      make_cards
+      5.times {|i| actor_new_card }
+      5.times {|i| enemy_new_card }
+      next_turn
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● 掛け金の更新
+  #--------------------------------------------------------------------------
+  def update_betting
+    @betting.contents.clear
+    @betting.change_color(@betting.system_color)
+    rect=@gold_window.contents.rect.clone
+    @betting.draw_text(rect,Vocab::PokerPot,1)
+    @betting.change_color(@betting.normal_color)
+    rect.y+=24
+    @betting.draw_text(rect,@input.betting.to_s,1)
+  end
+  #--------------------------------------------------------------------------
+  # ● ヘルプウィンドウの入力待ち
+  #--------------------------------------------------------------------------
+  def help_input
+    @help_window.open
+    Input.update
+    while !Input.trigger?(:C)
+      update
+    end
+    @help_window.close
+    @bid_or_pass.close
+    @call.close
+    while @help_window.openness !=0
+      update
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● ビッドする
+  #--------------------------------------------------------------------------
+  def bid
+    @help_window.set_text(Vocab::PokerBidValue)
+    @help_window.open
+    @input.start
+    while !@input.ok
+      update
+    end
+    Audio.se_play("Audio/SE/coin")
+    @actor_bet=@input.number
+    @for_call=@input.number
+    send_pot(@for_call)
+    @help_window.set_text(sprintf(Vocab::PokerBidOK,@actor_name,@for_call))
+    @input.ok =false
+    help_input
+    next_turn
+  end
+  #--------------------------------------------------------------------------
+  # ● パス
+  #--------------------------------------------------------------------------
+  def pass
+    Audio.se_play("Audio/SE/Wind1")
+    @help_window.set_text(sprintf(Vocab::PokerBidPass,@actor_name))
+    help_input
+    @turn-=1
+    next_turn
+  end
+  #--------------------------------------------------------------------------
+  # ● ドロップする
+  #--------------------------------------------------------------------------
+  def drop
+    @help_window.set_text(Vocab::PokerDrop)
+    @help_window.open
+    Audio.se_play("Audio/SE/Collapse2")
+    5.times {|i| actor_delete_card(i) }
+    e_open_cards
+    while !Input.trigger?(:C)
+      update
+    end
+    pay_back
+    5.times {|i| enemy_delete_card(i) }
+    @bid_or_pass.close
+    @actors_turn=false
+    continue?
+  end
+  #--------------------------------------------------------------------------
+  # ● 続ける?
+  #--------------------------------------------------------------------------
+  def continue?
+    @screen_shot.opacity=0
+    @text.bitmap.clear
+    @screen_shot.bitmap=Graphics.snap_to_bitmap
+    @screen_shot.bitmap.blur
+    @screen_shot.color.set(16, 16, 16, 128)
+    15.downto(1){|i|@screen_shot.opacity=255/i;update}
+
+    @help_window.set_text(Vocab::PokerContinue)
+    @help_window.open
+    @yes_or_no.open
+    @yes_or_no.activate
+  end
+  #--------------------------------------------------------------------------
+  # ● ゲーム続行
+  #--------------------------------------------------------------------------
+  def yes
+    10.times{|i| @screen_shot.opacity=255-255*i/10}
+    @screen_shot.bitmap.dispose
+    @help_window.close
+    @yes_or_no.close
+    while @help_window.openness !=0
+      update_basic
+    end
+    game_set
+  end
+  #--------------------------------------------------------------------------
+  # ● ゲーム終了
+  #--------------------------------------------------------------------------
+  def no
+    @help_window.close
+    RPG::BGM.fade(2 * 1000)
+    SceneManager.goto(Scene_Map)
+  end
+  #--------------------------------------------------------------------------
+  # ● 次の行動
+  #--------------------------------------------------------------------------
+  def next_turn
+    @actors_turn^=true
+    @turn+=1
+    case @@turn_program[@turn]
+    when :bet
+      Audio.se_play("Audio/SE/Bell1")
+      count(Vocab::PokerBettinground)
+      if @actors_turn
+        bit_or_pass
+      else
+        enemy_bit_or_drop
+      end
+    when :call
+      if @actors_turn
+        call_or_raise
+      else
+        enemy_call_or_raise
+      end
+    when :change
+      Audio.se_play("Audio/SE/Bell2")
+      if @actors_turn
+      count(Vocab::PokerActorDraw)
+        change_actor_card
+      else
+      count(Vocab::PokerEnemyDraw)
+        change_enemy_card
+      end
+    when :open
+      Audio.se_play("Audio/SE/Darkness7")
+      count(Vocab::PokerOPEN)
+      a_open_cards
+      e_open_cards
+      win_lose_judge
+      end_effect
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● 勝敗判定
+  #--------------------------------------------------------------------------
+  def win_lose_judge
+    case pointing(@actor)<=>pointing(@enemy)
+    when 0
+      case when_draw(@actor)<=>when_draw(@enemy)
+      when 1
+        return :win
+      when -1
+        return :lose
+      else
+        return :draw
+      end
+    when -1
+      return :win
+    when 1
+      return :lose
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● 引き分け時
+  #--------------------------------------------------------------------------
+  def when_draw(cards)
+    #ＲＳフラッシュの場合はマークで判断
+    return true if royal_straight_flash?(cards)
+
+    #フルハウスかスリーカードかフォーカードの場合は最も多いカードの数字で競う
+    if are_cards_fullhouse?(cards) || same_number_count(cards).include?(3) || 
+      same_number_count(cards).include?(4)
+      return card_number(cards)[same_number_count(cards).index(same_number_count(cards).max)]
+    end
+
+    #フラッシュかストレートの場合は最も大きいカードで競う
+    return card_number(cards).max if are_cards_flash?(cards) || are_cards_straight?(cards)
+
+    #ワンペアかツーペアの場合はペアになってるカードの合計で競う
+    if two_card?(cards) || same_number_count(cards).include?(2)
+      @r=0
+      return card_number(cards).inject(0) do |r,i| 
+        next if same_number_count(cards)[card_number(cards).index(i)] <= 1
+        @r+=i 
+      end
+    end
+    number_total(cards)
+  end
+  #--------------------------------------------------------------------------
+  # ● カードの合計
+  #--------------------------------------------------------------------------
+  def number_total(cards)
+    return card_number(cards).inject(0) {|r,i| r+=i } 
+  end
+  #--------------------------------------------------------------------------
+  # ● 終了の演出
+  #--------------------------------------------------------------------------
+  def end_effect
+    case win_lose_judge
+    when :draw
+      Audio.me_play("Audio/ME/Gag")
+      result("Draw...",Color.new(*[128]*3))
+      @actors_turn=rand(2)==0
+      pay_back(:draw)
+
+    when :win
+      Audio.me_play("Audio/ME/Fanfare1")
+      result("You Win!!",Color.new(255,92,92))
+      pay_back(:a)
+
+    @actors_turn=true
+    when :lose
+      Audio.me_play("Audio/ME/Mystery")
+      result("You Lose...",Color.new(60,60,192))
+      @actors_turn=false
+      pay_back
+    end
+    5.times {|i| actor_delete_card(i) }
+    5.times {|i| enemy_delete_card(i) }
+    continue?
+  end
+  #--------------------------------------------------------------------------
+  # ● 清算
+  #--------------------------------------------------------------------------
+  def pay_back(a_or_e=:e)
+    @input.betting.times do |i|
+      @input.betting-= a_or_e==:draw ? 2 : 1
+      @input.betting=[@input.betting,0].max
+      gain_gold(1) if a_or_e !=:e
+      if i%10==0
+        Audio.se_play("Audio/SE/Shop")
+        update_betting
+        @gold_window.refresh
+        update
+      end
+      break if @input.betting <= 0
+    end
+    Audio.se_play("Audio/SE/Shop")
+    update_betting
+    @gold_window.refresh
+  end
+  #--------------------------------------------------------------------------
+  # ● 結果発表
+  #--------------------------------------------------------------------------
+  def result(str,color=Color.new(*[0]*3))
+    @str.bitmap.font.color=color
+    @str.bitmap.draw_text(@str.bitmap.rect,str,1)
+    10.downto(1) do |i|
+      @str.zoom_x=i**1.8
+      @str.zoom_y=@str.zoom_x
+      update
+    end
+    while !Input.trigger?(:C)
+      update
+    end
+    @str.bitmap.font.color=Color.new(*[255]*3)
+    @str.bitmap.clear
+  end
+  #--------------------------------------------------------------------------
+  # ● カードの採点
+  #--------------------------------------------------------------------------
+  def pointing(cards)
+    return Vocab::Prizes.index(cards_prize(cards))
+  end
+  #--------------------------------------------------------------------------
+  # ● アクターのカードオープン
+  #--------------------------------------------------------------------------
+  def a_open_cards
+    @actor.size.times {|i| Audio.se_play("Audio/SE/Ice2")
+    6.times do
+      @a_display[i].y-=5
+      update
+    end
+    }
+    Audio.se_play("Audio/SE/Ice4")
+    text_display(cards_prize(@actor),:a,false)
+  end
+  #--------------------------------------------------------------------------
+  # ● エネミーのカードオープン
+  #--------------------------------------------------------------------------
+  def e_open_cards
+    @enemy.size.times {|c|
+    play_card
+    3.times do |i|
+      @e_display[c].zoom_x=1/(i.to_f+1)*Vocab::PokerCardsImageZoom
+      Graphics.update
+      @background_sprite.update
+    end
+    @e_display[c].bitmap=Cache.poker(@enemy[c])
+    3.downto(1) do |i|
+      @e_display[c].zoom_x=1/i.to_f*Vocab::PokerCardsImageZoom
+      update
+    end
+    }
+    Audio.se_play("Audio/SE/Ice4")
+    text_display(cards_prize(@enemy),:e,false)
+  end
+  #--------------------------------------------------------------------------
+  # ● アクターのカードを変える
+  #--------------------------------------------------------------------------
+  def change_actor_card
+    @help_window.set_text(Vocab::PokerChoose)
+    @help_window.open
+    @cursor.visible=true
+    @card_index=0
+    b=(46+96*@card_index)
+    @cursor.x=(@cards_pic.x-b)/5+b+39
+  end
+  #--------------------------------------------------------------------------
+  # ● ビットかパスか
+  #--------------------------------------------------------------------------
+  def bit_or_pass
+    Audio.se_play("Audio/SE/Decision2")
+    @bid_or_pass.open
+    @bid_or_pass.activate
+  end
+  #--------------------------------------------------------------------------
+  # ● コールかレイズか
+  #--------------------------------------------------------------------------
+  def call_or_raise
+    Audio.se_play("Audio/SE/Decision2")
+    @call.open
+    @call.activate
+  end
+  #--------------------------------------------------------------------------
+  # ● カードの生成
+  #--------------------------------------------------------------------------
+  def make_cards
+    c=Array.new(13) {|i| sprintf("c%02d",i+1) }
+    d=Array.new(13) {|i| sprintf("d%02d",i+1) }
+    s=Array.new(13) {|i| sprintf("s%02d",i+1) }
+    h=Array.new(13) {|i| sprintf("h%02d",i+1) }
+    j=[]#Array.new(2)  {|i| sprintf("x%02d",i+1) }
+    @cards=c+d+s+h+j
+  end
+  #--------------------------------------------------------------------------
+  # ● カードを取る
+  #--------------------------------------------------------------------------
+  def select_card
+    a=@cards.sample
+    @cards-=[a]
+    return a
+  end
+  #--------------------------------------------------------------------------
+  # ● アクター側のカードの削除
+  #--------------------------------------------------------------------------
+  def actor_delete_card(num)
+    play_card
+    @actor[num]=nil
+    5.times do |i|
+      @a_display[num].y+=20
+      update
+    end
+    @a_display[num].dispose
+    @a_display[num]=nil
+  end
+  #--------------------------------------------------------------------------
+  # ● エネミー側のカードの削除
+  #--------------------------------------------------------------------------
+  def enemy_delete_card(num)
+    play_card
+    @enemy[num]=nil
+    5.times do |i|
+      @e_display[num].y-=20
+      update
+    end
+    @e_display[num].dispose
+    @e_display[num]=nil
+  end
+  #--------------------------------------------------------------------------
+  # ● アクター側に新たなカード
+  #--------------------------------------------------------------------------
+  def actor_new_card
+    play_card
+    b=select_card
+    if @actor.include?(nil)
+      @num= @actor.index(nil)
+      @actor[@num]=b
+    else
+      @actor+=[b]
+      @num=@a_display.size
+    end
+    @reverse[@num]=false
+    @a_display[@num]=Sprite.new
+    @a_display[@num].bitmap=Cache.poker(b)
+    @a_display[@num].zoom_x=Vocab::PokerCardsImageZoom
+    @a_display[@num].zoom_y=@a_display[@num].zoom_x
+    @a_display[@num].ox=@a_display[@num].width/2
+    @a_display[@num].x=544
+    @a_display[@num].y=290
+    5.downto(1) do |i|
+      b=(46+96*@num)
+      @a_display[@num].x=(@cards_pic.x-b)/5*i+b+@a_display[@num].width/2*@a_display[@num].zoom_x
+      @a_display[@num].y=(@cards_pic.y-290+30)/5*i+290+30
+      update
+    end
+    actor_prize
+  end
+  #--------------------------------------------------------------------------
+  # ● アクターの手役を表示する
+  #--------------------------------------------------------------------------
+  def actor_prize
+    @poker_text.contents.clear
+    @poker_text.draw_text(@poker_text.contents.rect,cards_prize(@actor),1)
+  end
+  #--------------------------------------------------------------------------
+  # ● エネミー側に新たなカード
+  #--------------------------------------------------------------------------
+  def enemy_new_card
+    play_card
+    b=select_card
+    if @enemy.include?(nil)
+      @num= @enemy.index(nil)
+      @enemy[@num]=b
+    else
+      @enemy+=[b]
+      @num=@e_display.size
+      @e_reverse[@num]=false
+    end
+    @e_display[@num]=Sprite.new
+    @e_display[@num].bitmap=Cache.poker("z02")
+    @e_display[@num].zoom_x=Vocab::PokerCardsImageZoom
+    @e_display[@num].zoom_y=@e_display[@num].zoom_x
+    @e_display[@num].x=544
+    @e_display[@num].y=0
+    @e_display[@num].z=0
+    5.downto(1) do |i|
+      b=(46-128+96*@num)
+      @e_display[@num].x=(@cards_pic.x-b)/5*i+b
+      @e_display[@num].y=(@cards_pic.y-110)/5*i
+      update
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● カードの役
+  #--------------------------------------------------------------------------
+  def cards_prize(cards)
+    return "" if cards.compact.size !=5
+    return Vocab::Prizes[0] if royal_straight_flash?(cards)
+    return Vocab::Prizes[1] if are_cards_flash?(cards) && are_cards_straight?(cards)
+    return Vocab::Prizes[2] if same_number_count(cards).include?(4)
+    return Vocab::Prizes[3] if are_cards_fullhouse?(cards)
+    return Vocab::Prizes[4] if are_cards_flash?(cards)
+    return Vocab::Prizes[5] if are_cards_straight?(cards)
+    return Vocab::Prizes[6] if same_number_count(cards).include?(3)
+    return Vocab::Prizes[7] if two_card?(cards)
+    return Vocab::Prizes[8] if same_number_count(cards).include?(2)
+    return Vocab::Prizes[9]
+  end
+  #--------------------------------------------------------------------------
+  # ● カードがフルハウスか？
+  #--------------------------------------------------------------------------
+  def are_cards_fullhouse?(cards)
+    return same_number_count(cards).include?(3) && same_number_count(cards).include?(2)
+  end
+  #--------------------------------------------------------------------------
+  # ● カードがフラッシュか？
+  #--------------------------------------------------------------------------
+  def are_cards_flash?(cards)
+    flash=Marshal.load(Marshal.dump(cards))
+    flash.collect! {|i| i[0]}
+    return flash.uniq.size==1
+  end
+  #--------------------------------------------------------------------------
+  # ● カードがストレートか？
+  #--------------------------------------------------------------------------
+  def are_cards_straight?(cards)
+    straight=card_number(cards)
+    straight.sort_by!{|i| i }
+    return straight == Array.new(5) {|i| straight.min+i }
+  end
+  #--------------------------------------------------------------------------
+  # ● ロイヤルストレートフラッシュか？
+  #--------------------------------------------------------------------------
+  def royal_straight_flash?(cards)
+    straight=card_number(cards)
+    straight.sort!{|i| i }
+    return straight == [10,11,12,13,14] && are_cards_flash?(cards)
+  end
+  #--------------------------------------------------------------------------
+  # ● 同じ数字のカードをカウント
+  #--------------------------------------------------------------------------
+  def same_number_count(cards)
+    same=card_number(cards)
+    cards.each do |c|
+      same += (1..13).to_a.select{|i| same.include?(i) } if c[0] == ?x
+    end
+    p=[]
+    same.each{|i|
+      next if i==0
+      p+=[same.count(i)]
+      i=0}
+    return p
+  end
+  #--------------------------------------------------------------------------
+  # ● カードの数字だけ読み込む
+  #--------------------------------------------------------------------------
+  def card_number(cards)
+    num=cards.collect do |i|
+      i=~ /[^x](\d+)/
+      next unless $1
+      i = $1.to_i
+      i+=13 if i <= 1
+      i
+    end
+    return num
+  end
+  #--------------------------------------------------------------------------
+  # ● エネミーのコール
+  #--------------------------------------------------------------------------
+  def enemy_call
+    Audio.se_play("Audio/SE/coin")
+    enemy_send_pot(@for_call)
+    @help_window.set_text(sprintf(Vocab::PokerCall,@enemy_name,@for_call))
+    help_input
+    next_turn
+  end
+  #--------------------------------------------------------------------------
+  # ● エネミーのレイズ（AI）
+  #--------------------------------------------------------------------------
+  def enemy_raise
+    Audio.se_play("Audio/SE/coin")
+    Audio.se_play("Audio/SE/Wind2")
+    raise=@for_call+[evaluation_enemy_hand+rand(9)+1,50].max#暫定
+    enemy_send_pot(raise)
+    @for_call=raise
+    @help_window.set_text(sprintf(Vocab::PokerRaise,@enemy_name,raise))
+    help_input
+    next_turn
+  end
+  #--------------------------------------------------------------------------
+  # ● エネミーのコールかレイズか（AI）（暫定）
+  #--------------------------------------------------------------------------
+  def enemy_call_or_raise
+    p evaluation_for_enemy
+    if (evaluation_for_enemy < 75 || @for_call < evaluation_enemy_hand) && evaluation_enemy_hand >= 20
+      enemy_raise
+    else
+      if @input.betting>2500 && evaluation_enemy_hand < 20
+        enemy_drop
+      else
+        enemy_call
+      end
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● エネミーのビッドかドロップか（AI）（暫定）
+  #--------------------------------------------------------------------------
+  def enemy_bit_or_drop
+    if @input.betting>2200 && evaluation_enemy_hand < 20
+      enemy_drop
+    else
+      enemy_bit
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● エネミーがドロップする
+  #--------------------------------------------------------------------------
+  def enemy_drop
+    @help_window.set_text(sprintf(Vocab::PokerEnemyDrop,@enemy_name))
+    @help_window.open
+    Audio.se_play("Audio/SE/Collapse2")
+    5.times {|i| enemy_delete_card(i) }
+    while !Input.trigger?(:C)
+      update
+    end
+    pay_back(:a)
+    5.times {|i| actor_delete_card(i) }
+    @bid_or_pass.close
+    @actors_turn=true
+    continue?
+  end
+  #--------------------------------------------------------------------------
+  # ● 敵の行動のためのアクターの強気さ評価
+  #--------------------------------------------------------------------------
+  def evaluation_for_enemy
+    #アクターが変えたカードの枚数も評価する。
+    #５枚すべて変えたら０点とする。
+    #アクターの自信をカードを変えた枚数やビッドやレイズの額から判断し、
+    #エネミー自身のカードの強さも評価する
+    @actor_level=100-@a_change_times*20
+    @actor_level=@actor_level+@actor_bet/9
+    return @actor_level-evaluation_enemy_hand
+  end
+  #--------------------------------------------------------------------------
+  # ● エネミーの手を評価する
+  #--------------------------------------------------------------------------
+  def evaluation_enemy_hand
+    cards=@enemy
+    flash=aim_flash(cards)
+    straight=aim_straight(cards)
+
+    #ビッドやレイズの額の設定に使われるため、役と役の間の点数さを広げ過ぎるとバレバレになる
+    return 80 if royal_straight_flash?(cards)
+    return 80 if are_cards_flash?(cards) && are_cards_straight?(cards)
+    return 70 if same_number_count(cards).include?(4)
+    return 60 if are_cards_fullhouse?(cards)
+    return 55 if are_cards_flash?(cards)
+    return 50 if are_cards_straight?(cards)
+    return 40 if same_number_count(cards).include?(3)
+    return 30 if two_card?(cards)
+    return 20 if same_number_count(cards).include?(2)
+    return 10 if flash[1]>=3
+    return 10 if straight.size>=3
+    return 0
+  end
+  #--------------------------------------------------------------------------
+  # ● エネミーのベット（AI）
+  #--------------------------------------------------------------------------
+  def enemy_bit
+    evaluation_for_enemy
+    Audio.se_play("Audio/SE/coin")
+    @for_call=[evaluation_enemy_hand+rand(9)+1,10].max
+    @help_window.set_text(sprintf(Vocab::PokerBidOK,@enemy_name,@for_call))
+    help_input
+    send_pot(@for_call)
+    next_turn
+  end
+  #--------------------------------------------------------------------------
+  # ● エネミーのカードを変える（AI）
+  #--------------------------------------------------------------------------
+  def change_enemy_card
+    #現在の手持ちのカードをみて、基本的に３枚以上の種カードがあれば
+    #その形を目指す
+    cards=@enemy
+    flash=aim_flash(cards)
+    straight=aim_straight(cards)
+
+    if two_card?(cards) || same_number_count(cards).include?(2) || same_number_count(cards).include?(3)
+      #ツーペアかワンペア、スリーカードがすでに成立してる場合はフラッシュ狙いより優先
+      normal_action(cards)
+    elsif flash[1]>=3
+      p flash[0]+"のフラッシュを狙う" if flash[1]>=3
+      @e_reverse.size.times {|w| @e_reverse[w]=true if flash[0] != @enemy[w][0] }
+    elsif straight.size>=3
+      p "ストレートを目指す"
+      #ストレートの種でない場合は捨てる
+      @e_reverse.size.times {|w| @e_reverse[w]=true if !straight.include?(card_number(cards)[w]) }
+    else
+      normal_action(cards)
+    end
+    if @e_reverse.all? {|w| w[1]==false }
+      Audio.se_play("Audio/SE/Thunder3")
+      text_display(Vocab::PokerNoChange,:e)
+    else
+      @e_reverse.each{|i| 
+      next unless i
+      next unless i[1]
+      enemy_delete_card(i[0]) }
+
+      @e_reverse.each{|i|
+      next unless i
+      next unless i[1]
+      enemy_new_card }
+    end
+    5.times {|i| @e_reverse[i]=false }
+    next_turn
+  end
+  #--------------------------------------------------------------------------
+  # ● フラッシュ
+  #--------------------------------------------------------------------------
+  # 条件：同種のカードが３枚以上あるとき
+  #--------------------------------------------------------------------------
+  def aim_flash(cards)
+    flash=Marshal.load(Marshal.dump(cards))
+    flash.collect! {|i| i[0]}
+    hash={}
+    ["s","h","d","c"].each {|i| hash[i]=flash.count(i) }
+    a=hash.max {|x, y| x[1] <=> y[1] }
+    return a
+  end
+  #--------------------------------------------------------------------------
+  # ● ストレート判定
+  #--------------------------------------------------------------------------
+  # 【条件】階段になっているカードが３枚以上あるとき
+  #--------------------------------------------------------------------------
+  def aim_straight(cards)
+    straight=card_number(cards)
+    @a=[]
+    straight.each{|i| 
+    a=Array.new(9){|j| i-4+j}
+    b=straight & a
+    @a=b if b.size>=3}
+    return @a
+  end
+  #--------------------------------------------------------------------------
+  # ● 通常処理
+  #--------------------------------------------------------------------------
+  # ペア以外のカードを捨てる
+  #--------------------------------------------------------------------------
+  def normal_action(cards)
+    if are_cards_flash?(cards) || are_cards_straight?(cards) || are_cards_fullhouse?(cards)
+      #フラッシュかストレートとフルハウスが既にできてるなら何もしない
+    elsif two_card?(cards) && !same_number_count(cards).include?(3)
+      #孤立しているカードを捨てる
+      p "ツーペアである"
+      @e_reverse.size.times {|w| @e_reverse[w]=true if same_number_count(cards)[w] <= 1 }
+    elsif same_number_count(cards).include?(3)
+      p "スリーカードである"
+      #孤立している最も小さいカードを一枚捨てる
+      @e_reverse.size.times {|w| 
+      if card_number(cards)[w]==card_number(cards).min && same_number_count(cards)[w] <= 1
+        @e_reverse[w]=true
+        break
+      end}
+    else
+      #孤立している１０以下のカードを全て捨てる
+      p "孤立している１０以下のカードを全て捨てる"
+      @e_reverse.size.times {|w| @e_reverse[w]=true if card_number(cards)[w]<=10 && same_number_count(cards)[w] <= 1 }
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● ツーペアか？
+  #--------------------------------------------------------------------------
+  def two_card?(cards)
+    return card_number(cards).uniq.size==3
+  end
+  #--------------------------------------------------------------------------
+  # ● シーン遷移の可能判定
+  #--------------------------------------------------------------------------
+  def scene_change_ok?
+    !$game_message.busy? && !$game_message.visible
+  end
+  #--------------------------------------------------------------------------
+  # ● フレーム更新
+  #--------------------------------------------------------------------------
+  def update
+    super
+    input_cursor
+  end
+  #--------------------------------------------------------------------------
+  # ● カーソル判定
+  #--------------------------------------------------------------------------
+  def input_cursor
+    if @input.active == true && @input.visible && @input.openness==255 && Input.trigger?(:B)
+      Sound.play_cancel
+      @input.deactivate
+      @input.close
+      @help_window.close
+      case @@turn_program[@turn]
+      when :bet
+        @bid_or_pass.open.activate
+      when :call
+        @call.open.activate
+      end
+    end
+
+    if @cursor.visible
+    @now+=1
+    if @cursor.x != @new_x
+      @cursor.x=@old_x+(@new_x-@old_x)*@x_now/5
+      @x_now+=1
+    end
+    @x_now=0 if @cursor.x == @new_x
+    
+    @a_display.each_with_index{|i,w|
+      a=0
+      a=-15 if @card_index==w
+      i.y=(@cards_pic.y-290+30)/5+290+30+a}
+
+        last_index = @card_index
+        if Input.repeat?(:RIGHT)
+          @card_index+=1
+          @card_index=0 if @card_index==@actor.size
+        elsif Input.repeat?(:LEFT)
+          @card_index-=1
+          @card_index=@actor.size-1 if @card_index==-1
+        elsif Input.trigger?(:B)
+          a_card_change
+        elsif Input.trigger?(:C)
+          a_turn_card(@card_index)
+        end
+
+    if @card_index != last_index
+      Sound.play_cursor if @card_index != -1
+
+      b=(46+96*[last_index,0].max)
+      @old_x=(@cards_pic.x-b)/5+b+39
+
+      b=(46+96*[@card_index,0].max)
+      @new_x=(@cards_pic.x-b)/5+b+39
+    end
+      @cursor.y=280+3*Math.sin(Math::PI * @now/60)
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● アクターカードチェンジ
+  #--------------------------------------------------------------------------
+  def a_card_change
+    @card_index=-1
+    @help_window.close
+    update
+    @cursor.visible=false
+    
+    if @reverse.all? {|w| w[1]==false }
+      Audio.se_play("Audio/SE/Thunder3")
+      text_display(Vocab::PokerNoChange,:a)
+    else
+      @reverse.each{|i|
+      next unless i
+      next unless i[1]
+      actor_delete_card(i[0])
+      @a_change_times+=1}
+
+      @reverse.each{|i|
+      next unless i
+      next unless i[1]
+      actor_new_card}
+    end
+    while @help_window.openness !=0
+      update_basic
+    end
+    next_turn
+  end
+  #--------------------------------------------------------------------------
+  # ● アクターのカードをひっくり返す
+  #--------------------------------------------------------------------------
+  def a_turn_card(index)
+    play_card
+    3.times do |i|
+      @a_display[index].zoom_x=1/(i.to_f+1)*Vocab::PokerCardsImageZoom
+      Graphics.update
+    end
+    if @reverse[index]
+      @a_display[index].bitmap=Cache.poker(@actor[index])
+    else
+      @a_display[index].bitmap=Cache.poker("z02")
+    end
+    @reverse[index]^=true
+    3.downto(1) do |i|
+      @a_display[index].zoom_x=1/i.to_f*Vocab::PokerCardsImageZoom
+      update
+    end
+  end
+  #--------------------------------------------------------------------------
+  # ● 背景の解放
+  #--------------------------------------------------------------------------
+  def dispose_background
+    @background_sprite.dispose
+  end
+  #--------------------------------------------------------------------------
+  # ● 終了処理
+  #--------------------------------------------------------------------------
+  def terminate
+    super
+    dispose_background
+    dispose_sprites
+  end
+  #--------------------------------------------------------------------------
+  # ● 背景の解放
+  #--------------------------------------------------------------------------
+  def dispose_sprites
+    @message_window.dispose
+  end
+end
+
+#==============================================================================
+# ■ Game_Interpreter
+#------------------------------------------------------------------------------
+# 　イベントコマンドを実行するインタプリタです。このクラスは Game_Map クラス、
+# Game_Troop クラス、Game_Event クラスの内部で使用されます。
+#==============================================================================
+
+class Game_Interpreter
+  #--------------------------------------------------------------------------
+  # ● ポーカー画面を呼び出す
+  #--------------------------------------------------------------------------
+  def call_poker(name,face_name,face_index,ante,bgm="Battle5")
+    SceneManager.call(Scene_BeforePoker)
+    SceneManager.scene.prepare(name,face_name,face_index,ante,bgm)
+    Fiber.yield
+  end
+end
+
