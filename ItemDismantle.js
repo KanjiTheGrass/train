@@ -55,7 +55,52 @@
  * @default 【手に入れたアイテム】
  * @type string
  *
-*/
+ * @param CategoryWindowRect
+ * @text 【座標】カテゴリーウィンドウ
+ * @type struct<Rectangle>
+ * @default {"x":"0","y":"108","width":"1024","height":"72"}
+ *
+ * @param ItemListWindowRect
+ * @text 【座標】アイテムウィンドウ
+ * @type struct<Rectangle>
+ * @default {"x":"0","y":"180","width":"512","height":"396"}
+ *
+ * @param DismantleListWindowRect
+ * @text 【座標】解体先ウィンドウ
+ * @type struct<Rectangle>
+ * @default {"x":"512","y":"180","width":"512","height":"252"}
+ *
+ * @param DismantleCountWindowRect
+ * @text 【座標】解体数ウィンドウ
+ * @type struct<Rectangle>
+ * @default {"x":"512","y":"432","width":"512","height":"144"}
+ * 
+ * @param ResultWindowRect
+ * @text 【座標】解体結果ウィンドウ
+ * @type struct<Rectangle>
+ * @default {"x":"272","y":"123","width":"480","height":"330"}
+ */
+/*~struct~Rectangle:
+ * @param x
+ * @text X
+ * @type number
+ * @default 0
+ * 
+ * @param y
+ * @text Y
+ * @type number
+ * @default 0
+ * 
+ * @param width
+ * @text 横幅
+ * @type number
+ * @default 0
+ * 
+ * @param height
+ * @text 縦幅
+ * @type number
+ * @default 0
+ */
 
 var KNS_ItemDismantle = {
 	name: "ItemDismantle",
@@ -73,10 +118,16 @@ var KNS_ItemDismantle = {
 				default:  return;
 			}
 			var item = data[id];
-			list.push([ item, Math.min(Math.floor(num), $gameParty.maxItems(item)) ]);
+			list.push([ item, Math.min(Math.floor(num || 1), $gameParty.maxItems(item)) ]);
 		}, this);
 		this.reDismantleMeta.lastIndex = 0;
 		return list;
+	},
+	parseRectangle(json){
+		const rect = JsonEx.parse(json);
+		return new Rectangle(
+			Number(rect.x), Number(rect.y), Number(rect.width), Number(rect.height)
+		);
 	}
 };
 
@@ -89,6 +140,12 @@ var KNS_ItemDismantle = {
 	this.param.DismantleSound = String(this.param["DismantleSound"]);
 	this.param.DismantledItemName = String(this.param["DismantledItem"]);
 	this.param.ObtainedItemName = String(this.param["ObtainedItem"]);
+
+	this.param.CategoryWindowRect       = this.parseRectangle(this.param.CategoryWindowRect);
+	this.param.ItemListWindowRect       = this.parseRectangle(this.param.ItemListWindowRect);
+	this.param.DismantleListWindowRect  = this.parseRectangle(this.param.DismantleListWindowRect);
+	this.param.DismantleCountWindowRect = this.parseRectangle(this.param.DismantleCountWindowRect);
+	this.param.ResultWindowRect         = this.parseRectangle(this.param.ResultWindowRect);
 
 	//===============================================================
 	// alias Game_Interpreter
@@ -347,57 +404,54 @@ class Scene_Dismantle extends Scene_MenuBase{
 		this.createHelpWindow();
 		this.createCategoryWindow();
 		this.createItemWindow();
+		this.createResultListWindow();
+		this.createCountWindow();
 		this.createResultWindow();
-	};
-	createResultWindow() {
-		var w = 480;
-		var h = 330;
-		this._resultBaseWindow = new Window_DismantleResult(
-			(Graphics.boxWidth - w) * 0.5,
-			(Graphics.boxHeight - h) * 0.5,
-			w, h
-		);
-		this._resultBaseWindow.setHandler('ok', this.onResultDone.bind(this))
-		this._resultBaseWindow.setHandler('cancel', this.onResultDone.bind(this))
-		this.addWindow(this._resultBaseWindow);
-	};
-	createCategoryWindow() {
-		this._categoryWindow = new Window_ItemCategory();
-		this._categoryWindow.setHelpWindow(this._helpWindow);
-		this._categoryWindow.y = this._helpWindow.height;
-		this._categoryWindow.setHandler('ok', this.onCategoryOk.bind(this));
-		this._categoryWindow.setHandler('cancel', this.popScene.bind(this));
-		this.addWindow(this._categoryWindow);
-	};
-	createItemWindow () {
-		var wy = this._categoryWindow.y + this._categoryWindow.height;
-		var wh = Graphics.boxHeight - wy;
-		var w = 420;
-		var ch = 144;
-
-		this._itemWindow = new Window_DismantleList(0, wy, w, wh);
-		this._itemWindow.setHandler('ok', this.onItemOk.bind(this));
-		this._itemWindow.setHandler('cancel', this.onItemCancel.bind(this));
-		this.addWindow(this._itemWindow);
-
-		this._resultWindow = new Window_DismantleResultList(w, wy, Graphics.boxWidth - w, wh - ch);
-		this.addWindow(this._resultWindow);
-
-		this._countWindow = new Window_DismantleCount(
-			this._resultWindow.x,
-			this._resultWindow.y + this._resultWindow.height,
-			this._resultWindow.width,
-			ch
-		);
-		this._countWindow.setHandler('ok', this.onCountOk.bind(this));
-		this._countWindow.setHandler('cancel', this.onCountCancel.bind(this));
-		this.addWindow(this._countWindow);
 
 		this._categoryWindow.setItemWindow(this._itemWindow);
 		this._countWindow.knsSetResultListWindow(this._resultWindow);
 		this._itemWindow.knsSetCountWindow(this._countWindow);
 		this._itemWindow.setHelpWindow(this._helpWindow);
 	};
+	createResultWindow() {
+		var rect = KNS_ItemDismantle.param.ResultWindowRect;
+		this._resultBaseWindow = new Window_DismantleResult(rect.x, rect.y, rect.width, rect.height);
+		this._resultBaseWindow.setHandler('ok', this.onResultDone.bind(this))
+		this._resultBaseWindow.setHandler('cancel', this.onResultDone.bind(this))
+		this.addWindow(this._resultBaseWindow);
+	};
+	createCategoryWindow() {
+		var rect = KNS_ItemDismantle.param.CategoryWindowRect;
+		this._categoryWindow = new Window_ItemCategory();
+		this._categoryWindow.move(rect.x, rect.y);
+		this._categoryWindow.width  = rect.width;
+		this._categoryWindow.height = rect.height;
+		this._categoryWindow.refresh();
+
+		this._categoryWindow.setHelpWindow(this._helpWindow);
+		this._categoryWindow.setHandler('ok', this.onCategoryOk.bind(this));
+		this._categoryWindow.setHandler('cancel', this.popScene.bind(this));
+		this.addWindow(this._categoryWindow);
+	};
+	createItemWindow () {
+		var rect = KNS_ItemDismantle.param.ItemListWindowRect;
+		this._itemWindow = new Window_DismantleList(rect.x, rect.y, rect.width, rect.height);
+		this._itemWindow.setHandler('ok', this.onItemOk.bind(this));
+		this._itemWindow.setHandler('cancel', this.onItemCancel.bind(this));
+		this.addWindow(this._itemWindow);
+	};
+	createResultListWindow(){
+		var rect = KNS_ItemDismantle.param.DismantleListWindowRect;
+		this._resultWindow = new Window_DismantleResultList(rect.x, rect.y, rect.width, rect.height);
+		this.addWindow(this._resultWindow);
+	}
+	createCountWindow(){
+		var rect = KNS_ItemDismantle.param.DismantleCountWindowRect;
+		this._countWindow = new Window_DismantleCount(rect.x, rect.y, rect.width, rect.height);
+		this._countWindow.setHandler('ok', this.onCountOk.bind(this));
+		this._countWindow.setHandler('cancel', this.onCountCancel.bind(this));
+		this.addWindow(this._countWindow);
+	}
 	onCategoryOk () {
 		this._itemWindow.activate();
 		this._itemWindow.selectLast();
