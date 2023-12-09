@@ -58,27 +58,27 @@
  * @param CategoryWindowRect
  * @text 【座標】カテゴリーウィンドウ
  * @type struct<Rectangle>
- * @default {"x":"0","y":"108","width":"1024","height":"72"}
+ * @default {"x":"0","y":"108","width":"816","height":"72"}
  *
  * @param ItemListWindowRect
  * @text 【座標】アイテムウィンドウ
  * @type struct<Rectangle>
- * @default {"x":"0","y":"180","width":"512","height":"396"}
+ * @default {"x":"0","y":"180","width":"420","height":"444"}
  *
  * @param DismantleListWindowRect
  * @text 【座標】解体先ウィンドウ
  * @type struct<Rectangle>
- * @default {"x":"512","y":"180","width":"512","height":"252"}
+ * @default {"x":"420","y":"180","width":"396","height":"300"}
  *
  * @param DismantleCountWindowRect
  * @text 【座標】解体数ウィンドウ
  * @type struct<Rectangle>
- * @default {"x":"512","y":"432","width":"512","height":"144"}
+ * @default {"x":"420","y":"480","width":"396","height":"144"}
  * 
  * @param ResultWindowRect
  * @text 【座標】解体結果ウィンドウ
  * @type struct<Rectangle>
- * @default {"x":"272","y":"123","width":"480","height":"330"}
+ * @default {"x":"168","y":"147","width":"480","height":"330"}
  */
 /*~struct~Rectangle:
  * @param x
