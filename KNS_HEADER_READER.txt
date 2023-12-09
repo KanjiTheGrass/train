@@ -1,0 +1,86 @@
+﻿#====================================================
+# ■ KNS HEADER READER ver 1.00 by 莞爾の草
+#====================================================
+=begin
+　セーブデータからタイトルの表示モードを取得し、
+それに応じてレイアウトを変更できるようにします。
+
+　タイトルの表示モードは整数で管理し、最初は0から
+表示され、各セーブデータの
+「変数 KNS_VARIABLE_NUM（下記で設定）番目」
+の中で最も値の大きなものが適応されるようになります。
+=end
+
+module MOG_SCENE_TITLE_A
+  KNS_VARIABLE_NUM = 5 # タイトルの変数番号
+
+  BG_LIST = {
+  0=>"Book",
+  1=>"Castle",
+  }
+
+  MusicList = {
+  0 => {:name => "Battle5", :volume => 60},
+  1 => {:name => "Battle4", :pitch  => 140},
+  2 => {:name => "Battle1"},
+  }
+end
+
+#==============================================
+# ● DataManager
+#==============================================
+class << DataManager
+  alias __kns_read_header make_save_header
+  def make_save_header
+    header = __kns_read_header
+    header[:kns_title_mode] = $game_variables[MOG_SCENE_TITLE_A::KNS_VARIABLE_NUM]
+    return header
+  end
+end
+
+
+#==============================================
+# ● Scene_Title
+#==============================================
+class Scene_Title
+  alias knke_start start
+  def start
+    load_file_header
+    knke_start
+  end
+  def load_file_header
+    $__kns_title_mode = 0
+    re = /(\d+)\.rvdata2$/
+    Dir.glob('Save*.rvdata2').each do |path|
+      if path =~ re
+        header = DataManager.load_header($1.to_i - 1)
+        $__kns_title_mode = [$__kns_title_mode,
+                             header[:kns_title_mode].to_i].max
+      end
+    end
+  end
+  def play_title_music
+    RPG::BGM.stop
+    RPG::BGS.stop
+    RPG::ME.stop
+
+    music = MusicList[$__kns_title_mode]
+    if music
+      bgm = RPG::BGM.new(music[:name], music[:volume] || 100, 
+      music[:pitch] || 100)
+      bgm.play
+    end
+  end
+
+  def update_background
+    @sprite1.ox += RANDOM_PICTURES_SCROLL_SPEED[0]
+    @sprite1.oy += RANDOM_PICTURES_SCROLL_SPEED[1]
+    @sprite1.opacity += 5
+    @sprite2.opacity += 2
+    @sprite2.update
+  end
+  def execute_random_picture(initial = false)
+    pic = BG_LIST[$__kns_title_mode]
+    @sprite1.bitmap = Cache.title1(pic ? pic : "")
+  end
+end

@@ -1,0 +1,17 @@
+# ■スキルツリー修正パッチ by 莞爾の草
+# 　ver.1.01 2020/08/02
+# ・リスト最下行を習得すると最上行のスキルが
+# 　習得候補になってしまう不具合を修正
+class Window_tree
+  def learnable_skill?(i)
+    list = TREE[$game_variables[VARIABLES]]
+    # 上下参照
+    return true if check_skill(list[i + col_max])
+    return true if (j = i - col_max) >= 0 && check_skill(list[j])
+    # 左右参照
+    return true if (i % col_max).nonzero? && check_skill(list[i-1])
+    return true if ((j=i.next) % col_max).nonzero? && check_skill(list[j])
+    return false
+  end
+  def check_skill(skill);skill && skill_learned?(skill);end
+end
