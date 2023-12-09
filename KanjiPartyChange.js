@@ -2,7 +2,7 @@
  * ===========================================================================
  * KanjiPartyChange.js
  * ---------------------------------------------------------------------------
- * version 1.04
+ * version 1.05
  * Copyright (c) 2020 Kanji the Grass
  * This work is provided under the MTCM Blue License
  * - https://ja.materialcommons.org/mtcm-b-summary/
@@ -916,6 +916,8 @@
  * ver.1.04(2020/08/18)
  * ・ステータスウィンドウに表示する項目を変更できるようにしました。
  * （追加・特殊能力値にも対応）
+ * ver.1.05(2023/09/13)
+ * ・スロットの表示を修正
  * 
  * ■利用規約
  * この作品は マテリアル・コモンズ・ブルー・ライセンスの下に提供されています。
@@ -1308,13 +1310,16 @@
 
                 if (param.equipShow) {
                     a = eval(param.equipPos), x = a[0], y = a[1];
-                    for (var index in actor.equipSlots()) {
+                    const slots = actor.equips();
+                    actor.equipSlots().forEach(function(slotId, index){
                         window.changeTextColor(window.systemColor());
-                        window.drawText($dataSystem.equipTypes[actor.equipSlots()[index]],
-                        x, y, 100, window.lineHeight());
-                        window.drawItemName(actor.equips()[index], x + 100, y, a[2] - 100);
+                        window.drawText($dataSystem.equipTypes[slotId], x, y, 100, window.lineHeight());
+                        if (slots[index]){
+                            window.drawItemName(slots[index], x + 100, y, a[2] - 100);
+                        }
                         y += param.equipRow;
-                    }
+
+                    }, this);
                 }
                 if (param.statusShow) {
                     a = eval(param.statusPos), x = a[0], y = a[1] - param.statusRow;
