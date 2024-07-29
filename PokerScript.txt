@@ -1,94 +1,89 @@
-#==============================================================================
-# ¡ ‘Îíƒ|[ƒJ[ƒXƒNƒŠƒvƒg@Version 0.01@by ŠÎŽ¢‚Ì‘
+ï»¿#==============================================================================
+# â–  å¯¾æˆ¦ãƒãƒ¼ã‚«ãƒ¼ã‚¹ã‚¯ãƒªãƒ—ãƒˆã€€Version 1.00ã€€by èŽžçˆ¾ã®è‰
 #------------------------------------------------------------------------------
-# @‚P‘Î‚P‚Ì‘ÎíŒ^ƒ|[ƒJ[ƒXƒNƒŠƒvƒg‚Å‚·B
+# ã€€ï¼‘å¯¾ï¼‘ã®å¯¾æˆ¦åž‹ãƒãƒ¼ã‚«ãƒ¼ã‚¹ã‚¯ãƒªãƒ—ãƒˆã§ã™ã€‚
 #==============================================================================
 =begin
+ ã€æ³¨æ„ã€‘
+ ï¼‘ï¼Žãƒãƒ¼ã‚«ãƒ¼ã‚’çŸ¥ã‚‰ãªã„äººé–“ãŒä½œã£ãŸãŸã‚ãƒ«ãƒ¼ãƒ«ã«èª¤ã‚ŠãŒã‚ã‚‹å ´åˆãŒã‚ã‚Šã¾ã™ã€‚
+ ã€€ã€€ã”å®¹èµ¦ãã ã•ã„ã€‚
+ ï¼’ï¼Žã‚¸ãƒ§ãƒ¼ã‚«ãƒ¼ã«ã¯å¯¾å¿œã—ã¦ã„ã¾ã›ã‚“ã€‚
+ ï¼“ï¼Žæ•µã®å¼·ã•ã‚„æ•µã®ãƒãƒƒãƒ—ãªã©ã®è¨­å®šã¯ã§ãã¾ã›ã‚“ã€‚
 
- y’ˆÓz
- ‚PD–{ƒXƒNƒŠƒvƒg‚ÍƒWƒ‡[ƒJ[‚É‚Í‘Î‰ž‚µ‚Ä‚¢‚Ü‚¹‚ñB
- ‚QDƒ|[ƒJ[‚ÉÚ‚µ‚­‚È‚¢lŠÔ‚ªì‚Á‚½‚Ì‚ÅA‚à‚µ‚©‚µ‚½‚çŠÔˆá‚Á‚Ä‚¢‚é“_‚ª
- @@‚ ‚é‚©‚à‚µ‚ê‚Ü‚¹‚ñB
- ‚RD“G‚Ì‹­‚³‚â“G‚Ìƒ`ƒbƒv‚È‚Ç‚ÌÝ’è‚Í‚Å‚«‚Ü‚¹‚ñB
- ‚SD‚à‚µ‰½‚©‚µ‚ç‚Ì–â‘è‚ª‚ ‚Á‚½ê‡‚Í‰½‚È‚è‚Æ‚¨\‚µ•t‚¯‚­‚¾‚³‚¢B
- @@“y‰ºÀ‚µ‚Ä‚¨˜l‚Ñ‚ÉŽf‚¢‚Ü‚·B
- ‚TDƒgƒ‰ƒ“ƒv‚Ì‰æ‘œ‚Í–³—¿‘fÞ‹äŠy•”—l‚©‚ç’ñ‹Ÿ‚³‚ê‚½‘fÞ‚Å‚·B
- @@â‘Î‚É‚±‚ÌƒvƒƒWƒFƒNƒg‚©‚çƒRƒsƒy‚¹‚¸‚É–³—¿‘fÞ‹äŠy•”—l‚ÌƒTƒCƒg
- @@ihttp://sozai.7gates.net/docs/trump/j‚©‚çDL‚µ‚Ä‚­‚¾‚³‚¢B
- @@‚à‚µ•s³‚ªŒ©‚Â‚©‚Á‚½ê‡‚Í–{‘fÞ‚ÌŒöŠJ’âŽ~‚¨‚æ‚Ñ‘S–Ê“I‚È—˜—p‹ÖŽ~
- @@‚ðs‚¢‚Ü‚·i‚»‚êˆÈŠO‚ÌƒJ[ƒ\ƒ‹‚Ì‘fÞ‚È‚Ç‚ÍŽ©ì‚È‚Ì‚ÅƒtƒŠ[‚Å‚·jB
+ ã€å°Žå…¥æ‰‹é †ã€‘
+ ï¼‘ï¼ŽGraphicsãƒ•ã‚©ãƒ«ãƒ€ã«Pokerãƒ•ã‚©ãƒ«ãƒ€ã‚’ä½œã‚‹
 
- y•K—v‚È‚±‚Æz
- ‚PDGraphicsƒtƒHƒ‹ƒ_‚Ì’†‚ÉPoker‚Æ‚¢‚¤ƒtƒ@ƒCƒ‹‚ðì‚Á‚Ä‚­‚¾‚³‚¢B
- ‚QD‚»‚Ì’†‚Éƒgƒ‰ƒ“ƒv‚Ì‰æ‘œiÚ×«j‚ð—pˆÓ‚µ‚Ä‚­‚¾‚³‚¢
- ¦ƒgƒ‰ƒ“ƒv‚Ì‰æ‘œ‚Ì–¼‘O‚Í•K‚¸c01‚Æ‚¢‚¤‚æ‚¤‚ÈAƒ}[ƒN‚Ì“ª•¶Žš{
- @ƒJ[ƒh‚Ì”Žš”Ô†iˆêŒ…‚Ìê‡‚Í‚P‚O‚ÌˆÊ‚É‚O‚ð‚Â‚¯‚éj‚Å\¬‚³‚ê‚½
- @ƒtƒ@ƒCƒ‹–¼‚ð‚Â‚¯‚Ä‚­‚¾‚³‚¢B
- @ƒNƒ[ƒo[‚ªc‚Åƒ_ƒCƒA‚ªdAƒn[ƒg‚ªh‚ÅƒXƒy[ƒh‚ªs‚Å‚·B
- ¦„§‚·‚éƒTƒCƒY‚Í80*120‚Å‚·BVocab‚ÉÝ’è‚³‚ê‚Ä‚¢‚éPokerCardsImageZoom‚Å
-@ ƒJ[ƒh‚ÌŠg‘å—¦‚ð’²®‚Å‚«‚Ü‚·B
- ‚RDƒJ[ƒh‘I‘ðŽž‚É•K—v‚ÈƒJ[ƒ\ƒ‹‚ÆAƒgƒ‰ƒ“ƒv‚Ì— –Ê‚Ì‰æ‘œ‚ð—pˆÓ‚µ‚Ä‚­‚¾‚³‚¢B
- @@ƒJ[ƒ\ƒ‹‚Ìƒtƒ@ƒCƒ‹–¼‚ÍcursorA— –Êƒgƒ‰ƒ“ƒv‚Ì‰æ‘œ‚Íz02‚Æ‚¢‚¤–¼‘O‚ð•t‚¯‚Ä‚­‚¾‚³‚¢B
+ ï¼’ï¼ŽPokerãƒ•ã‚©ãƒ«ãƒ€ã«ä»¥ä¸‹ã®è¦æ ¼ã®ãƒˆãƒ©ãƒ³ãƒ—ç”»åƒã‚’ç”¨æ„ã™ã‚‹
+ ã€€ãƒ»ãƒžãƒ¼ã‚¯ï¼”ç¨®ã‚’c(ã‚¯ãƒ­ãƒ¼ãƒãƒ¼),dï¼ˆãƒ€ã‚¤ã‚¢ï¼‰,hï¼ˆãƒãƒ¼ãƒˆï¼‰,sï¼ˆã‚¹ãƒšãƒ¼ãƒ‰ï¼‰ã€
+ ã€€ã€€ï¼‘ï½žï¼«ã¾ã§ã‚’01ï½ž13ã®äºŒæ¡ã®æ•°å€¤ã§è¡¨è¨˜ã—3æ–‡å­—ã§çµåˆã—ãŸãƒ•ã‚¡ã‚¤ãƒ«åã‚’ä»˜ã‘ã‚‹ã€‚
+ ã€€ä¾‹ï¼‰c01, d05, h13 ...
+ â€»æŽ¨å¥¨ã™ã‚‹ã‚µã‚¤ã‚ºã¯80*120ã§ã™ã€‚Vocabã«è¨­å®šã•ã‚Œã¦ã„ã‚‹PokerCardsImageZoomã§
+ã€€ ã‚«ãƒ¼ãƒ‰ã®æ‹¡å¤§çŽ‡ã‚’èª¿æ•´ã§ãã¾ã™ã€‚
 
- yŽn‚ß•ûz
- ‚PDƒCƒxƒ“ƒgƒXƒNƒŠƒvƒg‚Écall_poker(name,face_name,face_index,ante,bgm)
- @@‚Æ“ü—Í‚µ‚Ü‚·iname‚Íƒ|[ƒJ[’†‚É•\Ž¦‚·‚é“G‚Ì–¼‘OAface_name‚Í
- @@ŠçƒOƒ‰‚Ì–¼‘OAface_index‚ÍŠçƒOƒ‰‚ÌindexBbgm‚Íí“¬’†‚É—¬‚·
- @@BGM‚Å‚·BBGM‚ª“ü—Í‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Í"Battle5"‚ª—¬‚ê‚Ü‚·jB
- @@Ante‚ÍƒQ[ƒ€ŠJŽnŽž‚É•¥‚¤ƒAƒ“ƒeƒB‚Å‚·B
+ ï¼“ï¼ŽPokerãƒ•ã‚©ãƒ«ãƒ€ã«ã€Œã‚«ãƒ¼ãƒ‰é¸æŠžæ™‚ã«å¿…è¦ãªã‚«ãƒ¼ã‚½ãƒ«(cursor.png)ã€
+ ã€€ã€€ã€Œãƒˆãƒ©ãƒ³ãƒ—ã®è£é¢ç”»åƒ(z02.png)ã€ã‚’ç”¨æ„ã™ã‚‹ã€‚
+
+ ã€å®Ÿè¡Œæ–¹æ³•ã€‘
+ ã‚¤ãƒ™ãƒ³ãƒˆã‚³ãƒžãƒ³ãƒ‰ã§ä»¥ä¸‹ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å®Ÿè¡Œ
+ call_poker("name","face_name",face_index,ante,"bgm")
+ ãƒ»name: ãƒ‡ã‚£ãƒ¼ãƒ©ãƒ¼å
+ ãƒ»face_name: ãƒ‡ã‚£ãƒ¼ãƒ©ãƒ¼ã®é¡”ã‚°ãƒ©ãƒ•ã‚¡ã‚¤ãƒ«å
+ ãƒ»face_index: é¡”ã‚°ãƒ©ã®index
+ ãƒ»bgm: BGM(çœç•¥æ™‚ã¯"Battle5")
+ ãƒ»Ante: ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã«æ‰•ã†ã‚¢ãƒ³ãƒ†ã‚£
 =end
 
 #--------------------------------------------------------------------------
-# œ —pŒêW
+# â— ç”¨èªžé›†
 #--------------------------------------------------------------------------
 module Vocab
-  Prizes=["‚qD‚rDƒtƒ‰ƒbƒVƒ…","‚rDƒtƒ‰ƒbƒVƒ…",
-  "ƒtƒHƒAƒJ[ƒh","ƒtƒ‹ƒnƒEƒX","ƒtƒ‰ƒbƒVƒ…","ƒXƒgƒŒ[ƒg",
-  "ƒXƒŠ[ƒJ[ƒh","ƒc[ƒyƒA","ƒƒ“ƒyƒA","ƒm[ƒJ[ƒh"]
+  Prizes=["ï¼²ï¼Žï¼³ï¼Žãƒ•ãƒ©ãƒƒã‚·ãƒ¥","ï¼³ï¼Žãƒ•ãƒ©ãƒƒã‚·ãƒ¥",
+  "ãƒ•ã‚©ã‚¢ã‚«ãƒ¼ãƒ‰","ãƒ•ãƒ«ãƒã‚¦ã‚¹","ãƒ•ãƒ©ãƒƒã‚·ãƒ¥","ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆ",
+  "ã‚¹ãƒªãƒ¼ã‚«ãƒ¼ãƒ‰","ãƒ„ãƒ¼ãƒšã‚¢","ãƒ¯ãƒ³ãƒšã‚¢","ãƒŽãƒ¼ã‚«ãƒ¼ãƒ‰"]
   
-  PokerUseTip=true #ŠŽ‹à‚Ì‘ã‚í‚è‚Éƒ`ƒbƒv‚ðŽg‚¤‚©H
+  PokerUseTip=true #æ‰€æŒé‡‘ã®ä»£ã‚ã‚Šã«ãƒãƒƒãƒ—ã‚’ä½¿ã†ã‹ï¼Ÿ
   
-  PokerVariableForTip=1 #ƒ`ƒbƒvŠz‚ðŠi”[‚·‚é•Ï”BPokerUseTip‚ªtrue‚Ì‚Æ‚«‚ÉŽg‚¤
+  PokerVariableForTip=1 #ãƒãƒƒãƒ—é¡ã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°ã€‚PokerUseTipãŒtrueã®ã¨ãã«ä½¿ã†
   
-  PokerCardsImageZoom=0.4 #ƒgƒ‰ƒ“ƒv‚Ì‰æ‘œ‚ÌŠg‘å—¦B
+  PokerCardsImageZoom=0.4 #ãƒˆãƒ©ãƒ³ãƒ—ã®ç”»åƒã®æ‹¡å¤§çŽ‡ã€‚
   
-  PokerUnit=PokerUseTip ? "–‡" : "‰~"
+  PokerUnit=PokerUseTip ? "æžš" : "å††"
   
-  PokerLittleMoney=PokerUseTip ? "ƒ`ƒbƒv‚ª‘«‚è‚Ü‚¹‚ñccB" : "‚¨‹à‚ª‘«‚è‚Ü‚¹‚ñccB"
+  PokerLittleMoney=PokerUseTip ? "ãƒãƒƒãƒ—ãŒè¶³ã‚Šã¾ã›ã‚“â€¦â€¦ã€‚" : "ãŠé‡‘ãŒè¶³ã‚Šã¾ã›ã‚“â€¦â€¦ã€‚"
 
-  PokerRaise="%s‚Í%s"+sprintf("%sƒŒƒCƒY‚µ‚½I",PokerUnit)
+  PokerRaise="%sã¯%s"+sprintf("%sãƒ¬ã‚¤ã‚ºã—ãŸï¼",PokerUnit)
 
-  PokerCall ="%s‚Í%s"+sprintf("%sƒR[ƒ‹‚µ‚½I",PokerUnit)
+  PokerCall ="%sã¯%s"+sprintf("%sã‚³ãƒ¼ãƒ«ã—ãŸï¼",PokerUnit)
 
-  PokerCheck="%s‚Íƒ`ƒFƒbƒN‚Å‚±‚Ìê‚ð—¬‚µ‚½I"
+  PokerCheck="%sã¯ãƒã‚§ãƒƒã‚¯ã§ã“ã®å ´ã‚’æµã—ãŸï¼"
 
-  PokerUncallable="ƒR[ƒ‹‚Å‚«‚Ü‚¹‚ñB"
+  PokerUncallable="ã‚³ãƒ¼ãƒ«ã§ãã¾ã›ã‚“ã€‚"
 
-  PokerUnraisable="ƒŒƒCƒY‚ÌŠz‚ÍƒR[ƒ‹‚ÌŠz‚ð’´‚¦‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·B"
+  PokerUnraisable="ãƒ¬ã‚¤ã‚ºã®é¡ã¯ã‚³ãƒ¼ãƒ«ã®é¡ã‚’è¶…ãˆã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚"
 
-  PokerRaiseValue="ƒŒƒCƒY‚·‚éŠz‚ðŒˆ‚ß‚Ä‚­‚¾‚³‚¢B"
+  PokerRaiseValue="ãƒ¬ã‚¤ã‚ºã™ã‚‹é¡ã‚’æ±ºã‚ã¦ãã ã•ã„ã€‚"
 
-  PokerAnte="ƒAƒ“ƒeƒB‚Æ‚µ‚Ä%s"+sprintf("%s‚ðŽx•¥‚Á‚½I",PokerUnit)
+  PokerAnte="ã‚¢ãƒ³ãƒ†ã‚£ã¨ã—ã¦%s"+sprintf("%sã‚’æ”¯æ‰•ã£ãŸï¼",PokerUnit)
 
-  PokerPot="ƒ|ƒbƒg"
+  PokerPot="ãƒãƒƒãƒˆ"
   
-  PokerBidValue="ƒrƒbƒh‚·‚éŠz‚ðŒˆ‚ß‚Ä‚­‚¾‚³‚¢B"
+  PokerBidValue="ãƒ“ãƒƒãƒ‰ã™ã‚‹é¡ã‚’æ±ºã‚ã¦ãã ã•ã„ã€‚"
 
-  PokerBidOK="%s‚Í%s"+sprintf("%sƒrƒbƒh‚µ‚½I",PokerUnit)
+  PokerBidOK="%sã¯%s"+sprintf("%sãƒ“ãƒƒãƒ‰ã—ãŸï¼",PokerUnit)
 
-  PokerBidPass="%s‚Íƒrƒbƒh‚ðƒpƒX‚µ‚½I"
+  PokerBidPass="%sã¯ãƒ“ãƒƒãƒ‰ã‚’ãƒ‘ã‚¹ã—ãŸï¼"
 
-  PokerDrop="ƒhƒƒbƒv‚µ‚Ü‚µ‚½cc"
+  PokerDrop="ãƒ‰ãƒ­ãƒƒãƒ—ã—ã¾ã—ãŸâ€¦â€¦"
 
-  PokerContinue="ƒQ[ƒ€‚ð‘±‚¯‚Ü‚·‚©H"
+  PokerContinue="ã‚²ãƒ¼ãƒ ã‚’ç¶šã‘ã¾ã™ã‹ï¼Ÿ"
 
-  PokerChoose="•Ï‚¦‚éƒJ[ƒh‚ð‘I‚ñ‚Å‚­‚¾‚³‚¢BŒðŠ·ŠJŽn‚ÍBƒ{ƒ^ƒ“B"
+  PokerChoose="å¤‰ãˆã‚‹ã‚«ãƒ¼ãƒ‰ã‚’é¸ã‚“ã§ãã ã•ã„ã€‚äº¤æ›é–‹å§‹ã¯Bãƒœã‚¿ãƒ³ã€‚"
 
-  PokerEnemyDrop="%s‚ªƒhƒƒbƒv‚µ‚Ü‚µ‚½cc"
+  PokerEnemyDrop="%sãŒãƒ‰ãƒ­ãƒƒãƒ—ã—ã¾ã—ãŸâ€¦â€¦"
   
-  PokerVocabs=["ƒrƒbƒh","ƒpƒX","ƒR[ƒ‹","ƒŒƒCƒY","ƒ`ƒFƒbƒN","ƒhƒƒbƒv"]
+  PokerVocabs=["ãƒ“ãƒƒãƒ‰","ãƒ‘ã‚¹","ã‚³ãƒ¼ãƒ«","ãƒ¬ã‚¤ã‚º","ãƒã‚§ãƒƒã‚¯","ãƒ‰ãƒ­ãƒƒãƒ—"]
 
-  PokerWantToDrop=["‚Í‚¢","‚¢‚¢‚¦"]
+  PokerWantToDrop=["ã¯ã„","ã„ã„ãˆ"]
 
   PokerNoChange="NO CHANGE"
 
@@ -100,16 +95,16 @@ module Vocab
   
   PokerBettinground="Betting Round"
   
-  PokerFirst="‚ ‚È‚½‚ÍæU‚Å‚·B"
+  PokerFirst="ã‚ãªãŸã¯å…ˆæ”»ã§ã™ã€‚"
   
-  PokerSecond="‚ ‚È‚½‚ÍŒãU‚Å‚·B"
+  PokerSecond="ã‚ãªãŸã¯å¾Œæ”»ã§ã™ã€‚"
 
-  PokerFirstSelect="ƒJ[ƒh‚ðˆê‚Â‘I‚ñ‚Å‚­‚¾‚³‚¢B"
+  PokerFirstSelect="ã‚«ãƒ¼ãƒ‰ã‚’ä¸€ã¤é¸ã‚“ã§ãã ã•ã„ã€‚"
 
 end
 module Cache
   #--------------------------------------------------------------------------
-  # œ ƒAƒjƒ[ƒVƒ‡ƒ“ ƒOƒ‰ƒtƒBƒbƒN‚ÌŽæ“¾
+  # â— ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã®å–å¾—
   #--------------------------------------------------------------------------
   def self.poker(filename)
     load_bitmap("Graphics/Poker/", filename)
@@ -117,20 +112,20 @@ module Cache
 end
 
 #==============================================================================
-# ¡ Window_PokerGold
+# â–  Window_PokerGold
 #------------------------------------------------------------------------------
-# @ŠŽ‹à‚©ƒ`ƒbƒv‚ð•\Ž¦‚·‚éƒEƒBƒ“ƒhƒE‚Å‚·B
+# ã€€æ‰€æŒé‡‘ã‹ãƒãƒƒãƒ—ã‚’è¡¨ç¤ºã™ã‚‹ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã§ã™ã€‚
 #==============================================================================
 
 class Window_PokerGold < Window_Gold
   #--------------------------------------------------------------------------
-  # œ ŠŽ‹à‚ÌŽæ“¾
+  # â— æ‰€æŒé‡‘ã®å–å¾—
   #--------------------------------------------------------------------------
   def value
     Vocab::PokerUseTip ? $game_variables[Vocab::PokerVariableForTip] : $game_party.gold
   end
   #--------------------------------------------------------------------------
-  # œ ’Ê‰Ý’PˆÊ‚ÌŽæ“¾
+  # â— é€šè²¨å˜ä½ã®å–å¾—
   #--------------------------------------------------------------------------
   def currency_unit
     Vocab::PokerUnit
@@ -138,15 +133,15 @@ class Window_PokerGold < Window_Gold
 end
 
 #==============================================================================
-# ¡ Scene_Battle
+# â–  Scene_Battle
 #------------------------------------------------------------------------------
-# @ƒoƒgƒ‹‰æ–Ê‚Ìˆ—‚ðs‚¤ƒNƒ‰ƒX‚Å‚·B
+# ã€€ãƒãƒˆãƒ«ç”»é¢ã®å‡¦ç†ã‚’è¡Œã†ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 #==============================================================================
 
 class Scene_BeforePoker < Scene_MenuBase
   def play_card;Audio.se_play("Audio/SE/Wind7");end
   #--------------------------------------------------------------------------
-  # œ ŠJŽnˆ—
+  # â— é–‹å§‹å‡¦ç†
   #--------------------------------------------------------------------------
   def start
     super
@@ -168,7 +163,7 @@ class Scene_BeforePoker < Scene_MenuBase
     create_two_cards
   end
   #--------------------------------------------------------------------------
-  # œ ƒwƒ‹ƒvƒEƒBƒ“ƒhƒE‚Ìì¬
+  # â— ãƒ˜ãƒ«ãƒ—ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
   #--------------------------------------------------------------------------
   def create_help_window
     @help_window=Window_Help.new(1)
@@ -176,14 +171,14 @@ class Scene_BeforePoker < Scene_MenuBase
     @help_window.z=1900
   end
   #--------------------------------------------------------------------------
-  # œ €”õ
+  # â— æº–å‚™
   #--------------------------------------------------------------------------
   def prepare(name,face_name,face_index,ante,bgm)
     Audio.bgm_play("Audio/BGM/"+bgm)
     @prepare=[name,face_name,face_index,ante]
   end
   #--------------------------------------------------------------------------
-  # œ “ñ–‡‚ÌƒJ[ƒh
+  # â— äºŒæžšã®ã‚«ãƒ¼ãƒ‰
   #--------------------------------------------------------------------------
   def create_two_cards
     @help_window.set_text(Vocab::PokerFirstSelect)
@@ -192,7 +187,7 @@ class Scene_BeforePoker < Scene_MenuBase
     @cursor.visible=true
   end
   #--------------------------------------------------------------------------
-  # œ ƒAƒNƒ^[‚ÌƒJ[ƒh‚ð‚Ð‚Á‚­‚è•Ô‚·
+  # â— ã‚¢ã‚¯ã‚¿ãƒ¼ã®ã‚«ãƒ¼ãƒ‰ã‚’ã²ã£ãã‚Šè¿”ã™
   #--------------------------------------------------------------------------
   def a_turn_card(index)
     play_card
@@ -214,7 +209,7 @@ class Scene_BeforePoker < Scene_MenuBase
     after_that unless @a
   end
   #--------------------------------------------------------------------------
-  # œ ƒ}[ƒN‚ð“Ç‚ÝŽæ‚é
+  # â— ãƒžãƒ¼ã‚¯ã‚’èª­ã¿å–ã‚‹
   #--------------------------------------------------------------------------
   def card_mark(cards)
     case cards[0]
@@ -226,7 +221,7 @@ class Scene_BeforePoker < Scene_MenuBase
     return a
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒh‚Ì”Žš‚¾‚¯“Ç‚Ýž‚Þ
+  # â— ã‚«ãƒ¼ãƒ‰ã®æ•°å­—ã ã‘èª­ã¿è¾¼ã‚€
   #--------------------------------------------------------------------------
   def card_number(cards)
     cards=~ /[^x](\d+)/
@@ -237,7 +232,7 @@ class Scene_BeforePoker < Scene_MenuBase
     return i
   end
   #--------------------------------------------------------------------------
-  # œ ‚»‚ÌŒã
+  # â— ãã®å¾Œ
   #--------------------------------------------------------------------------
   def after_that
     @a=true
@@ -267,21 +262,21 @@ class Scene_BeforePoker < Scene_MenuBase
     SceneManager.scene.prepare(*@prepare,@actor_first)
   end
   #--------------------------------------------------------------------------
-  # œ ƒAƒNƒ^[æU
+  # â— ã‚¢ã‚¯ã‚¿ãƒ¼å…ˆæ”»
   #--------------------------------------------------------------------------
   def win
     @help_window.set_text(Vocab::PokerFirst)
     @actor_first=false
   end
   #--------------------------------------------------------------------------
-  # œ ƒAƒNƒ^[ŒãU
+  # â— ã‚¢ã‚¯ã‚¿ãƒ¼å¾Œæ”»
   #--------------------------------------------------------------------------
   def lose
     @help_window.set_text(Vocab::PokerSecond)
     @actor_first=true
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒh‚ð‰º‚°‚é
+  # â— ã‚«ãƒ¼ãƒ‰ã‚’ä¸‹ã’ã‚‹
   #--------------------------------------------------------------------------
   def delele_card(num)
     play_card
@@ -295,7 +290,7 @@ class Scene_BeforePoker < Scene_MenuBase
     @cards_display[num]=nil
   end
   #--------------------------------------------------------------------------
-  # œ ƒAƒbƒvƒf[ƒg
+  # â— ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆ
   #--------------------------------------------------------------------------
   def update
     super
@@ -332,7 +327,7 @@ class Scene_BeforePoker < Scene_MenuBase
     end
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒh‚ð‰Á‚¦‚é
+  # â— ã‚«ãƒ¼ãƒ‰ã‚’åŠ ãˆã‚‹
   #--------------------------------------------------------------------------
   def add_card
     Audio.se_play("Audio/SE/Wind7")
@@ -357,7 +352,7 @@ class Scene_BeforePoker < Scene_MenuBase
     @new_x=@old_x
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒh‚Ì¶¬
+  # â— ã‚«ãƒ¼ãƒ‰ã®ç”Ÿæˆ
   #--------------------------------------------------------------------------
   def make_cards
     c=Array.new(13) {|i| sprintf("c%02d",i+1) }
@@ -367,7 +362,7 @@ class Scene_BeforePoker < Scene_MenuBase
     @cards=c+d+s+h
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒh‚ðŽæ‚é
+  # â— ã‚«ãƒ¼ãƒ‰ã‚’å–ã‚‹
   #--------------------------------------------------------------------------
   def select_card
     a=@cards.sample
@@ -379,11 +374,11 @@ end
 
 
   #--------------------------------------------------------------------------
-  # œ ƒxƒbƒg‚©ƒhƒƒbƒv‚©
+  # â— ãƒ™ãƒƒãƒˆã‹ãƒ‰ãƒ­ãƒƒãƒ—ã‹
   #--------------------------------------------------------------------------
 class Window_Bit_or_Pass < Window_HorzCommand
   #--------------------------------------------------------------------------
-  # œ ƒIƒuƒWƒFƒNƒg‰Šú‰»
+  # â— ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåˆæœŸåŒ–
   #--------------------------------------------------------------------------
   def initialize
     super(0, Graphics.height-166)
@@ -398,13 +393,13 @@ class Window_Bit_or_Pass < Window_HorzCommand
     select(0)
   end
   #--------------------------------------------------------------------------
-  # œ Œ…”‚ÌŽæ“¾
+  # â— æ¡æ•°ã®å–å¾—
   #--------------------------------------------------------------------------
   def col_max
     return 3
   end
   #--------------------------------------------------------------------------
-  # œ ƒRƒ}ƒ“ƒhƒŠƒXƒg‚Ìì¬
+  # â— ã‚³ãƒžãƒ³ãƒ‰ãƒªã‚¹ãƒˆã®ä½œæˆ
   #--------------------------------------------------------------------------
   def make_command_list
     add_command(Vocab::PokerVocabs[0], :bid)
@@ -414,17 +409,17 @@ class Window_Bit_or_Pass < Window_HorzCommand
 end
 
   #--------------------------------------------------------------------------
-  # œ ƒR[ƒ‹EƒŒƒCƒYEƒhƒƒbƒv
+  # â— ã‚³ãƒ¼ãƒ«ãƒ»ãƒ¬ã‚¤ã‚ºãƒ»ãƒ‰ãƒ­ãƒƒãƒ—
   #--------------------------------------------------------------------------
 class Window_Call < Window_Bit_or_Pass
   #--------------------------------------------------------------------------
-  # œ Œ…”‚ÌŽæ“¾
+  # â— æ¡æ•°ã®å–å¾—
   #--------------------------------------------------------------------------
   def col_max
     return 4
   end
   #--------------------------------------------------------------------------
-  # œ ƒRƒ}ƒ“ƒhƒŠƒXƒg‚Ìì¬
+  # â— ã‚³ãƒžãƒ³ãƒ‰ãƒªã‚¹ãƒˆã®ä½œæˆ
   #--------------------------------------------------------------------------
   def make_command_list
     add_command(Vocab::PokerVocabs[2], :call)
@@ -437,7 +432,7 @@ end
 
 class Window_Yes_or_No < Window_Command
   #--------------------------------------------------------------------------
-  # œ ƒIƒuƒWƒFƒNƒg‰Šú‰»
+  # â— ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåˆæœŸåŒ–
   #--------------------------------------------------------------------------
   def initialize
     super(0, 0)
@@ -446,20 +441,20 @@ class Window_Yes_or_No < Window_Command
     deactivate
   end
   #--------------------------------------------------------------------------
-  # œ ƒEƒBƒ“ƒhƒE•‚ÌŽæ“¾
+  # â— ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å¹…ã®å–å¾—
   #--------------------------------------------------------------------------
   def window_width
     return 160
   end
   #--------------------------------------------------------------------------
-  # œ ƒEƒBƒ“ƒhƒEˆÊ’u‚ÌXV
+  # â— ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä½ç½®ã®æ›´æ–°
   #--------------------------------------------------------------------------
   def update_placement
     self.x = (Graphics.width - width) / 2
     self.y = (Graphics.height - height) / 2
   end
   #--------------------------------------------------------------------------
-  # œ ƒRƒ}ƒ“ƒhƒŠƒXƒg‚Ìì¬
+  # â— ã‚³ãƒžãƒ³ãƒ‰ãƒªã‚¹ãƒˆã®ä½œæˆ
   #--------------------------------------------------------------------------
   def make_command_list
     add_command(Vocab::PokerWantToDrop[0], :yes)
@@ -469,9 +464,9 @@ end
 
 
 #==============================================================================
-# ¡ Window_NumberInput
+# â–  Window_NumberInput
 #------------------------------------------------------------------------------
-# @ƒCƒxƒ“ƒgƒRƒ}ƒ“ƒhm”’l“ü—Í‚Ìˆ—n‚ÉŽg—p‚·‚éƒEƒBƒ“ƒhƒE‚Å‚·B
+# ã€€ã‚¤ãƒ™ãƒ³ãƒˆã‚³ãƒžãƒ³ãƒ‰ï¼»æ•°å€¤å…¥åŠ›ã®å‡¦ç†ï¼½ã«ä½¿ç”¨ã™ã‚‹ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã§ã™ã€‚
 #==============================================================================
 
 class Window_GoldInput < Window_NumberInput
@@ -479,7 +474,7 @@ class Window_GoldInput < Window_NumberInput
   attr_accessor :number
   attr_accessor :betting
   #--------------------------------------------------------------------------
-  # œ ƒIƒuƒWƒFƒNƒg‰Šú‰»
+  # â— ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåˆæœŸåŒ–
   #--------------------------------------------------------------------------
   def initialize(message_window)
     super(message_window)
@@ -493,13 +488,13 @@ class Window_GoldInput < Window_NumberInput
     deactivate
   end
   #--------------------------------------------------------------------------
-  # œ ŠŽ‹àFƒ`ƒbƒv
+  # â— æ‰€æŒé‡‘ï¼šãƒãƒƒãƒ—
   #--------------------------------------------------------------------------
   def gold
     Vocab::PokerUseTip ? $game_variables[Vocab::PokerVariableForTip] : $game_party.gold
   end
   #--------------------------------------------------------------------------
-  # œ Œˆ’èƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚Æ‚«‚Ìˆ—
+  # â— æ±ºå®šãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã¨ãã®å‡¦ç†
   #--------------------------------------------------------------------------
   def process_ok
     if @number>gold
@@ -512,7 +507,7 @@ class Window_GoldInput < Window_NumberInput
     end
   end
   #--------------------------------------------------------------------------
-  # œ “ü—Íˆ—‚ÌŠJŽn
+  # â— å…¥åŠ›å‡¦ç†ã®é–‹å§‹
   #--------------------------------------------------------------------------
   def start
     update_placement
@@ -522,7 +517,7 @@ class Window_GoldInput < Window_NumberInput
     activate
   end
   #--------------------------------------------------------------------------
-  # œ ƒEƒBƒ“ƒhƒEˆÊ’u‚ÌXV
+  # â— ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä½ç½®ã®æ›´æ–°
   #--------------------------------------------------------------------------
   def update_placement
     self.width = @digits_max * 20 + padding * 2
@@ -531,7 +526,7 @@ class Window_GoldInput < Window_NumberInput
     self.y = 200
   end
   #--------------------------------------------------------------------------
-  # œ ”Žš‚Ì•ÏXˆ—
+  # â— æ•°å­—ã®å¤‰æ›´å‡¦ç†
   #--------------------------------------------------------------------------
   def process_digit_change
     return unless active
@@ -552,21 +547,21 @@ end
 
 
 #==============================================================================
-# ¡ Scene_Battle
+# â–  Scene_Battle
 #------------------------------------------------------------------------------
-# @ƒoƒgƒ‹‰æ–Ê‚Ìˆ—‚ðs‚¤ƒNƒ‰ƒX‚Å‚·B
+# ã€€ãƒãƒˆãƒ«ç”»é¢ã®å‡¦ç†ã‚’è¡Œã†ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
 #==============================================================================
 
 class Scene_Poker < Scene_Base
   #--------------------------------------------------------------------------
-  # œ ƒgƒ‰ƒ“ƒWƒVƒ‡ƒ“‘¬“x‚ÌŽæ“¾
+  # â— ãƒˆãƒ©ãƒ³ã‚¸ã‚·ãƒ§ãƒ³é€Ÿåº¦ã®å–å¾—
   #--------------------------------------------------------------------------
   def transition_speed
     return 60
   end
   def play_card;Audio.se_play("Audio/SE/Wind7");end
   #--------------------------------------------------------------------------
-  # œ ŠJŽnˆ—
+  # â— é–‹å§‹å‡¦ç†
   #--------------------------------------------------------------------------
   def start
     super
@@ -575,7 +570,7 @@ class Scene_Poker < Scene_Base
     create_spriteset
   end
   #--------------------------------------------------------------------------
-  # œ ”wŒi‚Ìì¬
+  # â— èƒŒæ™¯ã®ä½œæˆ
   #--------------------------------------------------------------------------
   def create_background
     @background_sprite = Sprite.new
@@ -584,7 +579,7 @@ class Scene_Poker < Scene_Base
     @background_sprite.color.set(16, 16, 16, 128)
   end
   #--------------------------------------------------------------------------
-  # œ €”õ
+  # â— æº–å‚™
   #--------------------------------------------------------------------------
   def prepare(name,face_name,face_index,ante,first)
     @actors_turn=first
@@ -593,7 +588,7 @@ class Scene_Poker < Scene_Base
     @enemy_faceinfo=[face_name,face_index]
   end
   #--------------------------------------------------------------------------
-  # œ ƒXƒvƒ‰ƒCƒgƒZƒbƒg‚Ìì¬
+  # â— ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚»ãƒƒãƒˆã®ä½œæˆ
   #--------------------------------------------------------------------------
   def create_spriteset
     initialize_variables
@@ -617,7 +612,7 @@ class Scene_Poker < Scene_Base
     game_set
   end
   #--------------------------------------------------------------------------
-  # œ •Ï”“™‚Ì‰Šú‰»
+  # â— å¤‰æ•°ç­‰ã®åˆæœŸåŒ–
   #--------------------------------------------------------------------------
   def initialize_variables
     @now,@x_now=0,0
@@ -631,7 +626,7 @@ class Scene_Poker < Scene_Base
     @betting=0
   end
   #--------------------------------------------------------------------------
-  # œ yes_or_noƒEƒBƒ“ƒhƒEì¬
+  # â— yes_or_noã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä½œæˆ
   #--------------------------------------------------------------------------
   def create_yes_or_no
     @yes_or_no=Window_Yes_or_No.new
@@ -640,7 +635,7 @@ class Scene_Poker < Scene_Base
     @yes_or_no.set_handler(:no, method(:no))
   end
   #--------------------------------------------------------------------------
-  # œ Bid or PassƒEƒBƒ“ƒhƒEì¬
+  # â— Bid or Passã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä½œæˆ
   #--------------------------------------------------------------------------
   def create_bid_or_pass
     @bid_or_pass=Window_Bit_or_Pass.new
@@ -649,7 +644,7 @@ class Scene_Poker < Scene_Base
     @bid_or_pass.set_handler(:drop, method(:drop))
   end
   #--------------------------------------------------------------------------
-  # œ ƒR[ƒ‹ƒEƒBƒ“ƒhƒEì¬
+  # â— ã‚³ãƒ¼ãƒ«ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä½œæˆ
   #--------------------------------------------------------------------------
   def create_call_window
     @call=Window_Call.new
@@ -659,7 +654,7 @@ class Scene_Poker < Scene_Base
     @call.set_handler(:drop, method(:drop))
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒ\ƒ‹ì¬
+  # â— ã‚«ãƒ¼ã‚½ãƒ«ä½œæˆ
   #--------------------------------------------------------------------------
   def create_cursor
     @cursor=Sprite.new
@@ -673,21 +668,21 @@ class Scene_Poker < Scene_Base
     @new_x=@old_x
   end
   #--------------------------------------------------------------------------
-  # œ ƒ|[ƒJ[ƒEƒBƒ“ƒhƒE‚Ìì¬
+  # â— ãƒãƒ¼ã‚«ãƒ¼ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
   #--------------------------------------------------------------------------
   def create_poker_window
     @poker_text = Window_Base.new(@actor_face.width,@gold_window.y,
     Graphics.width-@actor_face.width-@gold_window.width,@gold_window.height)
   end
   #--------------------------------------------------------------------------
-  # œ ƒCƒ“ƒvƒbƒgƒEƒBƒ“ƒhƒE‚Ìì¬
+  # â— ã‚¤ãƒ³ãƒ—ãƒƒãƒˆã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
   #--------------------------------------------------------------------------
   def create_input_window
     @input = Window_GoldInput.new(@message_window)
     @input.z=500
   end
   #--------------------------------------------------------------------------
-  # œ ƒxƒbƒgƒEƒBƒ“ƒhƒE‚Ìì¬
+  # â— ãƒ™ãƒƒãƒˆã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
   #--------------------------------------------------------------------------
   def create_bet_window
     @betting=Window_Base.new((Graphics.width-@gold_window.width)/2,
@@ -695,14 +690,14 @@ class Scene_Poker < Scene_Base
     update_betting
   end
   #--------------------------------------------------------------------------
-  # œ ƒƒbƒZ[ƒWƒEƒBƒ“ƒhƒE‚Ìì¬
+  # â— ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
   #--------------------------------------------------------------------------
   def create_message_window
     @message_window = Window_Message.new
     @message_window.z=999
   end
   #--------------------------------------------------------------------------
-  # œ ƒS[ƒ‹ƒhƒEƒBƒ“ƒhƒE‚Ìì¬
+  # â— ã‚´ãƒ¼ãƒ«ãƒ‰ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
   #--------------------------------------------------------------------------
   def create_gold_window
     @gold_window = Window_PokerGold.new      
@@ -711,25 +706,25 @@ class Scene_Poker < Scene_Base
     @gold_window.z=999
   end
   #--------------------------------------------------------------------------
-  # œ ŠŽ‹àFƒ`ƒbƒv
+  # â— æ‰€æŒé‡‘ï¼šãƒãƒƒãƒ—
   #--------------------------------------------------------------------------
   def gold
     Vocab::PokerUseTip ? $game_variables[Vocab::PokerVariableForTip] : $game_party.gold
   end
   #--------------------------------------------------------------------------
-  # œ ŠŽ‹àFƒ`ƒbƒv‚ð“¾‚é
+  # â— æ‰€æŒé‡‘ï¼šãƒãƒƒãƒ—ã‚’å¾—ã‚‹
   #--------------------------------------------------------------------------
   def gain_gold(gold)
     Vocab::PokerUseTip ? $game_variables[Vocab::PokerVariableForTip]+=gold : $game_party.lose_gold(gold)
   end
   #--------------------------------------------------------------------------
-  # œ ŠŽ‹àFƒ`ƒbƒv‚ðŽ¸‚¤
+  # â— æ‰€æŒé‡‘ï¼šãƒãƒƒãƒ—ã‚’å¤±ã†
   #--------------------------------------------------------------------------
   def lose_gold(gold)
     Vocab::PokerUseTip ? $game_variables[Vocab::PokerVariableForTip]-=gold : $game_party.lose_gold(gold)
   end
   #--------------------------------------------------------------------------
-  # œ ƒwƒ‹ƒvƒEƒBƒ“ƒhƒE‚Ìì¬
+  # â— ãƒ˜ãƒ«ãƒ—ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
   #--------------------------------------------------------------------------
   def create_help_window
     @help_window=Window_Help.new(1)
@@ -737,7 +732,7 @@ class Scene_Poker < Scene_Base
     @help_window.z=1900
   end
   #--------------------------------------------------------------------------
-  # œ ƒAƒNƒ^[‚ÆƒGƒlƒ~[‚ÌŠçƒOƒ‰ƒEƒBƒ“ƒhƒE‚Ìì¬
+  # â— ã‚¢ã‚¯ã‚¿ãƒ¼ã¨ã‚¨ãƒãƒŸãƒ¼ã®é¡”ã‚°ãƒ©ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
   #--------------------------------------------------------------------------
   def create_face_windows
     @actor_name=$game_party.battle_members[0].name
@@ -751,7 +746,7 @@ class Scene_Poker < Scene_Base
     @enemy_face.draw_text(*rect,@enemy_name,1)
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒh‚ÌŽR‚ÌƒXƒvƒ‰ƒCƒg‚Ìì¬
+  # â— ã‚«ãƒ¼ãƒ‰ã®å±±ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ä½œæˆ
   #--------------------------------------------------------------------------
   def create_cards_stack
     @cards_pic=Sprite.new
@@ -761,14 +756,14 @@ class Scene_Poker < Scene_Base
     @cards_pic.z=-19
   end
   #--------------------------------------------------------------------------
-  # œ ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒg‚Ì‚½‚ß‚ÌƒXƒvƒ‰ƒCƒg‚Ìì¬
+  # â— ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆã®ãŸã‚ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ä½œæˆ
   #--------------------------------------------------------------------------
   def create_sprite_for_screenshot
     @screen_shot = Sprite.new
     @screen_shot.z=1899
   end
   #--------------------------------------------------------------------------
-  # œ ƒeƒLƒXƒg•\Ž¦ƒXƒvƒ‰ƒCƒg‚Ìì¬
+  # â— ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤ºã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ä½œæˆ
   #--------------------------------------------------------------------------
   def create_text_sprite
     @text = Sprite.new
@@ -783,7 +778,7 @@ class Scene_Poker < Scene_Base
     @text.bitmap.font.name="Arial"
   end
   #--------------------------------------------------------------------------
-  # œ ƒJƒEƒ“ƒg—p‚ÌƒXƒvƒ‰ƒCƒg‚Ìì¬
+  # â— ã‚«ã‚¦ãƒ³ãƒˆç”¨ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ä½œæˆ
   #--------------------------------------------------------------------------
   def create_count_sprite
     @str = Sprite.new
@@ -798,7 +793,7 @@ class Scene_Poker < Scene_Base
     @str.bitmap.font.name="Arial"
   end
   #--------------------------------------------------------------------------
-  # œ ƒeƒLƒXƒg•\Ž¦
+  # â— ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤º
   #--------------------------------------------------------------------------
   def text_display(str,a_or_e,clear=true)
     @text.opacity=255
@@ -828,7 +823,7 @@ class Scene_Poker < Scene_Base
     end
   end
   #--------------------------------------------------------------------------
-  # œ ƒJƒEƒ“ƒg•\Ž¦
+  # â— ã‚«ã‚¦ãƒ³ãƒˆè¡¨ç¤º
   #--------------------------------------------------------------------------
   def count(str)
     @str.bitmap.draw_text(@str.bitmap.rect,str,1)
@@ -845,7 +840,7 @@ class Scene_Poker < Scene_Base
     @str.bitmap.clear
   end
   #--------------------------------------------------------------------------
-  # œ ƒ|ƒbƒg‚É‘—‚é
+  # â— ãƒãƒƒãƒˆã«é€ã‚‹
   #--------------------------------------------------------------------------
   def send_pot(gold)
     @input.betting+=gold
@@ -854,14 +849,14 @@ class Scene_Poker < Scene_Base
     update_betting
   end
   #--------------------------------------------------------------------------
-  # œ ƒGƒlƒ~[‚ªƒ|ƒbƒg‚É‘—‚é
+  # â— ã‚¨ãƒãƒŸãƒ¼ãŒãƒãƒƒãƒˆã«é€ã‚‹
   #--------------------------------------------------------------------------
   def enemy_send_pot(gold)
     @input.betting+=gold
     update_betting
   end
   #--------------------------------------------------------------------------
-  # œ ƒR[ƒ‹
+  # â— ã‚³ãƒ¼ãƒ«
   #--------------------------------------------------------------------------
   def call
     if @for_call > gold
@@ -882,7 +877,7 @@ class Scene_Poker < Scene_Base
     end
   end
   #--------------------------------------------------------------------------
-  # œ ƒ`ƒFƒbƒN
+  # â— ãƒã‚§ãƒƒã‚¯
   #--------------------------------------------------------------------------
   def check
     @actor_bet=0
@@ -891,7 +886,7 @@ class Scene_Poker < Scene_Base
     next_turn
   end
   #--------------------------------------------------------------------------
-  # œ ƒŒƒCƒY
+  # â— ãƒ¬ã‚¤ã‚º
   #--------------------------------------------------------------------------
   def raise
     if @for_call >= gold
@@ -908,8 +903,9 @@ class Scene_Poker < Scene_Base
       @help_window.set_text(Vocab::PokerRaiseValue)
       @help_window.open
       @input.start
-      while !@input.ok
-        update
+      update while @input.active
+      if !@input.ok
+        return
       end
       if @for_call >= @input.number
         Audio.se_play("Audio/SE/Buzzer1")
@@ -939,7 +935,7 @@ class Scene_Poker < Scene_Base
   end
   end
   #--------------------------------------------------------------------------
-  # œ ƒQ[ƒ€‚Ì€”õ
+  # â— ã‚²ãƒ¼ãƒ ã®æº–å‚™
   #--------------------------------------------------------------------------
   def game_set
     @turn=0
@@ -966,7 +962,7 @@ class Scene_Poker < Scene_Base
     end
   end
   #--------------------------------------------------------------------------
-  # œ Š|‚¯‹à‚ÌXV
+  # â— æŽ›ã‘é‡‘ã®æ›´æ–°
   #--------------------------------------------------------------------------
   def update_betting
     @betting.contents.clear
@@ -978,7 +974,7 @@ class Scene_Poker < Scene_Base
     @betting.draw_text(rect,@input.betting.to_s,1)
   end
   #--------------------------------------------------------------------------
-  # œ ƒwƒ‹ƒvƒEƒBƒ“ƒhƒE‚Ì“ü—Í‘Ò‚¿
+  # â— ãƒ˜ãƒ«ãƒ—ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å…¥åŠ›å¾…ã¡
   #--------------------------------------------------------------------------
   def help_input
     @help_window.open
@@ -994,26 +990,28 @@ class Scene_Poker < Scene_Base
     end
   end
   #--------------------------------------------------------------------------
-  # œ ƒrƒbƒh‚·‚é
+  # â— ãƒ“ãƒƒãƒ‰ã™ã‚‹
   #--------------------------------------------------------------------------
   def bid
     @help_window.set_text(Vocab::PokerBidValue)
     @help_window.open
     @input.start
-    while !@input.ok
-      update
+    p :no_start
+    update while @input.active
+    p :no_end
+    if @input.ok
+      Audio.se_play("Audio/SE/coin")
+      @actor_bet=@input.number
+      @for_call=@input.number
+      send_pot(@for_call)
+      @help_window.set_text(sprintf(Vocab::PokerBidOK,@actor_name,@for_call))
+      @input.ok =false
+      help_input
+      next_turn
     end
-    Audio.se_play("Audio/SE/coin")
-    @actor_bet=@input.number
-    @for_call=@input.number
-    send_pot(@for_call)
-    @help_window.set_text(sprintf(Vocab::PokerBidOK,@actor_name,@for_call))
-    @input.ok =false
-    help_input
-    next_turn
   end
   #--------------------------------------------------------------------------
-  # œ ƒpƒX
+  # â— ãƒ‘ã‚¹
   #--------------------------------------------------------------------------
   def pass
     Audio.se_play("Audio/SE/Wind1")
@@ -1023,7 +1021,7 @@ class Scene_Poker < Scene_Base
     next_turn
   end
   #--------------------------------------------------------------------------
-  # œ ƒhƒƒbƒv‚·‚é
+  # â— ãƒ‰ãƒ­ãƒƒãƒ—ã™ã‚‹
   #--------------------------------------------------------------------------
   def drop
     @help_window.set_text(Vocab::PokerDrop)
@@ -1041,7 +1039,7 @@ class Scene_Poker < Scene_Base
     continue?
   end
   #--------------------------------------------------------------------------
-  # œ ‘±‚¯‚é?
+  # â— ç¶šã‘ã‚‹?
   #--------------------------------------------------------------------------
   def continue?
     @screen_shot.opacity=0
@@ -1057,7 +1055,7 @@ class Scene_Poker < Scene_Base
     @yes_or_no.activate
   end
   #--------------------------------------------------------------------------
-  # œ ƒQ[ƒ€‘±s
+  # â— ã‚²ãƒ¼ãƒ ç¶šè¡Œ
   #--------------------------------------------------------------------------
   def yes
     10.times{|i| @screen_shot.opacity=255-255*i/10}
@@ -1070,7 +1068,7 @@ class Scene_Poker < Scene_Base
     game_set
   end
   #--------------------------------------------------------------------------
-  # œ ƒQ[ƒ€I—¹
+  # â— ã‚²ãƒ¼ãƒ çµ‚äº†
   #--------------------------------------------------------------------------
   def no
     @help_window.close
@@ -1078,7 +1076,7 @@ class Scene_Poker < Scene_Base
     SceneManager.goto(Scene_Map)
   end
   #--------------------------------------------------------------------------
-  # œ ŽŸ‚Ìs“®
+  # â— æ¬¡ã®è¡Œå‹•
   #--------------------------------------------------------------------------
   def next_turn
     @actors_turn^=true
@@ -1117,7 +1115,7 @@ class Scene_Poker < Scene_Base
     end
   end
   #--------------------------------------------------------------------------
-  # œ Ÿ”s”»’è
+  # â— å‹æ•—åˆ¤å®š
   #--------------------------------------------------------------------------
   def win_lose_judge
     case pointing(@actor)<=>pointing(@enemy)
@@ -1137,22 +1135,22 @@ class Scene_Poker < Scene_Base
     end
   end
   #--------------------------------------------------------------------------
-  # œ ˆø‚«•ª‚¯Žž
+  # â— å¼•ãåˆ†ã‘æ™‚
   #--------------------------------------------------------------------------
   def when_draw(cards)
-    #‚q‚rƒtƒ‰ƒbƒVƒ…‚Ìê‡‚Íƒ}[ƒN‚Å”»’f
+    #ï¼²ï¼³ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã®å ´åˆã¯ãƒžãƒ¼ã‚¯ã§åˆ¤æ–­
     return true if royal_straight_flash?(cards)
 
-    #ƒtƒ‹ƒnƒEƒX‚©ƒXƒŠ[ƒJ[ƒh‚©ƒtƒH[ƒJ[ƒh‚Ìê‡‚ÍÅ‚à‘½‚¢ƒJ[ƒh‚Ì”Žš‚Å‹£‚¤
+    #ãƒ•ãƒ«ãƒã‚¦ã‚¹ã‹ã‚¹ãƒªãƒ¼ã‚«ãƒ¼ãƒ‰ã‹ãƒ•ã‚©ãƒ¼ã‚«ãƒ¼ãƒ‰ã®å ´åˆã¯æœ€ã‚‚å¤šã„ã‚«ãƒ¼ãƒ‰ã®æ•°å­—ã§ç«¶ã†
     if are_cards_fullhouse?(cards) || same_number_count(cards).include?(3) || 
       same_number_count(cards).include?(4)
       return card_number(cards)[same_number_count(cards).index(same_number_count(cards).max)]
     end
 
-    #ƒtƒ‰ƒbƒVƒ…‚©ƒXƒgƒŒ[ƒg‚Ìê‡‚ÍÅ‚à‘å‚«‚¢ƒJ[ƒh‚Å‹£‚¤
+    #ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã‹ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆã®å ´åˆã¯æœ€ã‚‚å¤§ãã„ã‚«ãƒ¼ãƒ‰ã§ç«¶ã†
     return card_number(cards).max if are_cards_flash?(cards) || are_cards_straight?(cards)
 
-    #ƒƒ“ƒyƒA‚©ƒc[ƒyƒA‚Ìê‡‚ÍƒyƒA‚É‚È‚Á‚Ä‚éƒJ[ƒh‚Ì‡Œv‚Å‹£‚¤
+    #ãƒ¯ãƒ³ãƒšã‚¢ã‹ãƒ„ãƒ¼ãƒšã‚¢ã®å ´åˆã¯ãƒšã‚¢ã«ãªã£ã¦ã‚‹ã‚«ãƒ¼ãƒ‰ã®åˆè¨ˆã§ç«¶ã†
     if two_card?(cards) || same_number_count(cards).include?(2)
       @r=0
       return card_number(cards).inject(0) do |r,i| 
@@ -1163,13 +1161,13 @@ class Scene_Poker < Scene_Base
     number_total(cards)
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒh‚Ì‡Œv
+  # â— ã‚«ãƒ¼ãƒ‰ã®åˆè¨ˆ
   #--------------------------------------------------------------------------
   def number_total(cards)
     return card_number(cards).inject(0) {|r,i| r+=i } 
   end
   #--------------------------------------------------------------------------
-  # œ I—¹‚Ì‰‰o
+  # â— çµ‚äº†ã®æ¼”å‡º
   #--------------------------------------------------------------------------
   def end_effect
     case win_lose_judge
@@ -1196,7 +1194,7 @@ class Scene_Poker < Scene_Base
     continue?
   end
   #--------------------------------------------------------------------------
-  # œ ´ŽZ
+  # â— æ¸…ç®—
   #--------------------------------------------------------------------------
   def pay_back(a_or_e=:e)
     @input.betting.times do |i|
@@ -1216,7 +1214,7 @@ class Scene_Poker < Scene_Base
     @gold_window.refresh
   end
   #--------------------------------------------------------------------------
-  # œ Œ‹‰Ê”­•\
+  # â— çµæžœç™ºè¡¨
   #--------------------------------------------------------------------------
   def result(str,color=Color.new(*[0]*3))
     @str.bitmap.font.color=color
@@ -1233,13 +1231,13 @@ class Scene_Poker < Scene_Base
     @str.bitmap.clear
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒh‚ÌÌ“_
+  # â— ã‚«ãƒ¼ãƒ‰ã®æŽ¡ç‚¹
   #--------------------------------------------------------------------------
   def pointing(cards)
     return Vocab::Prizes.index(cards_prize(cards))
   end
   #--------------------------------------------------------------------------
-  # œ ƒAƒNƒ^[‚ÌƒJ[ƒhƒI[ƒvƒ“
+  # â— ã‚¢ã‚¯ã‚¿ãƒ¼ã®ã‚«ãƒ¼ãƒ‰ã‚ªãƒ¼ãƒ—ãƒ³
   #--------------------------------------------------------------------------
   def a_open_cards
     @actor.size.times {|i| Audio.se_play("Audio/SE/Ice2")
@@ -1252,7 +1250,7 @@ class Scene_Poker < Scene_Base
     text_display(cards_prize(@actor),:a,false)
   end
   #--------------------------------------------------------------------------
-  # œ ƒGƒlƒ~[‚ÌƒJ[ƒhƒI[ƒvƒ“
+  # â— ã‚¨ãƒãƒŸãƒ¼ã®ã‚«ãƒ¼ãƒ‰ã‚ªãƒ¼ãƒ—ãƒ³
   #--------------------------------------------------------------------------
   def e_open_cards
     @enemy.size.times {|c|
@@ -1272,7 +1270,7 @@ class Scene_Poker < Scene_Base
     text_display(cards_prize(@enemy),:e,false)
   end
   #--------------------------------------------------------------------------
-  # œ ƒAƒNƒ^[‚ÌƒJ[ƒh‚ð•Ï‚¦‚é
+  # â— ã‚¢ã‚¯ã‚¿ãƒ¼ã®ã‚«ãƒ¼ãƒ‰ã‚’å¤‰ãˆã‚‹
   #--------------------------------------------------------------------------
   def change_actor_card
     @help_window.set_text(Vocab::PokerChoose)
@@ -1283,7 +1281,7 @@ class Scene_Poker < Scene_Base
     @cursor.x=(@cards_pic.x-b)/5+b+39
   end
   #--------------------------------------------------------------------------
-  # œ ƒrƒbƒg‚©ƒpƒX‚©
+  # â— ãƒ“ãƒƒãƒˆã‹ãƒ‘ã‚¹ã‹
   #--------------------------------------------------------------------------
   def bit_or_pass
     Audio.se_play("Audio/SE/Decision2")
@@ -1291,7 +1289,7 @@ class Scene_Poker < Scene_Base
     @bid_or_pass.activate
   end
   #--------------------------------------------------------------------------
-  # œ ƒR[ƒ‹‚©ƒŒƒCƒY‚©
+  # â— ã‚³ãƒ¼ãƒ«ã‹ãƒ¬ã‚¤ã‚ºã‹
   #--------------------------------------------------------------------------
   def call_or_raise
     Audio.se_play("Audio/SE/Decision2")
@@ -1299,7 +1297,7 @@ class Scene_Poker < Scene_Base
     @call.activate
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒh‚Ì¶¬
+  # â— ã‚«ãƒ¼ãƒ‰ã®ç”Ÿæˆ
   #--------------------------------------------------------------------------
   def make_cards
     c=Array.new(13) {|i| sprintf("c%02d",i+1) }
@@ -1310,7 +1308,7 @@ class Scene_Poker < Scene_Base
     @cards=c+d+s+h+j
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒh‚ðŽæ‚é
+  # â— ã‚«ãƒ¼ãƒ‰ã‚’å–ã‚‹
   #--------------------------------------------------------------------------
   def select_card
     a=@cards.sample
@@ -1318,7 +1316,7 @@ class Scene_Poker < Scene_Base
     return a
   end
   #--------------------------------------------------------------------------
-  # œ ƒAƒNƒ^[‘¤‚ÌƒJ[ƒh‚Ìíœ
+  # â— ã‚¢ã‚¯ã‚¿ãƒ¼å´ã®ã‚«ãƒ¼ãƒ‰ã®å‰Šé™¤
   #--------------------------------------------------------------------------
   def actor_delete_card(num)
     play_card
@@ -1331,7 +1329,7 @@ class Scene_Poker < Scene_Base
     @a_display[num]=nil
   end
   #--------------------------------------------------------------------------
-  # œ ƒGƒlƒ~[‘¤‚ÌƒJ[ƒh‚Ìíœ
+  # â— ã‚¨ãƒãƒŸãƒ¼å´ã®ã‚«ãƒ¼ãƒ‰ã®å‰Šé™¤
   #--------------------------------------------------------------------------
   def enemy_delete_card(num)
     play_card
@@ -1344,7 +1342,7 @@ class Scene_Poker < Scene_Base
     @e_display[num]=nil
   end
   #--------------------------------------------------------------------------
-  # œ ƒAƒNƒ^[‘¤‚ÉV‚½‚ÈƒJ[ƒh
+  # â— ã‚¢ã‚¯ã‚¿ãƒ¼å´ã«æ–°ãŸãªã‚«ãƒ¼ãƒ‰
   #--------------------------------------------------------------------------
   def actor_new_card
     play_card
@@ -1373,14 +1371,14 @@ class Scene_Poker < Scene_Base
     actor_prize
   end
   #--------------------------------------------------------------------------
-  # œ ƒAƒNƒ^[‚ÌŽè–ð‚ð•\Ž¦‚·‚é
+  # â— ã‚¢ã‚¯ã‚¿ãƒ¼ã®æ‰‹å½¹ã‚’è¡¨ç¤ºã™ã‚‹
   #--------------------------------------------------------------------------
   def actor_prize
     @poker_text.contents.clear
     @poker_text.draw_text(@poker_text.contents.rect,cards_prize(@actor),1)
   end
   #--------------------------------------------------------------------------
-  # œ ƒGƒlƒ~[‘¤‚ÉV‚½‚ÈƒJ[ƒh
+  # â— ã‚¨ãƒãƒŸãƒ¼å´ã«æ–°ãŸãªã‚«ãƒ¼ãƒ‰
   #--------------------------------------------------------------------------
   def enemy_new_card
     play_card
@@ -1408,7 +1406,7 @@ class Scene_Poker < Scene_Base
     end
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒh‚Ì–ð
+  # â— ã‚«ãƒ¼ãƒ‰ã®å½¹
   #--------------------------------------------------------------------------
   def cards_prize(cards)
     return "" if cards.compact.size !=5
@@ -1424,13 +1422,13 @@ class Scene_Poker < Scene_Base
     return Vocab::Prizes[9]
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒh‚ªƒtƒ‹ƒnƒEƒX‚©H
+  # â— ã‚«ãƒ¼ãƒ‰ãŒãƒ•ãƒ«ãƒã‚¦ã‚¹ã‹ï¼Ÿ
   #--------------------------------------------------------------------------
   def are_cards_fullhouse?(cards)
     return same_number_count(cards).include?(3) && same_number_count(cards).include?(2)
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒh‚ªƒtƒ‰ƒbƒVƒ…‚©H
+  # â— ã‚«ãƒ¼ãƒ‰ãŒãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã‹ï¼Ÿ
   #--------------------------------------------------------------------------
   def are_cards_flash?(cards)
     flash=Marshal.load(Marshal.dump(cards))
@@ -1438,7 +1436,7 @@ class Scene_Poker < Scene_Base
     return flash.uniq.size==1
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒh‚ªƒXƒgƒŒ[ƒg‚©H
+  # â— ã‚«ãƒ¼ãƒ‰ãŒã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆã‹ï¼Ÿ
   #--------------------------------------------------------------------------
   def are_cards_straight?(cards)
     straight=card_number(cards)
@@ -1446,7 +1444,7 @@ class Scene_Poker < Scene_Base
     return straight == Array.new(5) {|i| straight.min+i }
   end
   #--------------------------------------------------------------------------
-  # œ ƒƒCƒ„ƒ‹ƒXƒgƒŒ[ƒgƒtƒ‰ƒbƒVƒ…‚©H
+  # â— ãƒ­ã‚¤ãƒ¤ãƒ«ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã‹ï¼Ÿ
   #--------------------------------------------------------------------------
   def royal_straight_flash?(cards)
     straight=card_number(cards)
@@ -1454,7 +1452,7 @@ class Scene_Poker < Scene_Base
     return straight == [10,11,12,13,14] && are_cards_flash?(cards)
   end
   #--------------------------------------------------------------------------
-  # œ “¯‚¶”Žš‚ÌƒJ[ƒh‚ðƒJƒEƒ“ƒg
+  # â— åŒã˜æ•°å­—ã®ã‚«ãƒ¼ãƒ‰ã‚’ã‚«ã‚¦ãƒ³ãƒˆ
   #--------------------------------------------------------------------------
   def same_number_count(cards)
     same=card_number(cards)
@@ -1469,7 +1467,7 @@ class Scene_Poker < Scene_Base
     return p
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒh‚Ì”Žš‚¾‚¯“Ç‚Ýž‚Þ
+  # â— ã‚«ãƒ¼ãƒ‰ã®æ•°å­—ã ã‘èª­ã¿è¾¼ã‚€
   #--------------------------------------------------------------------------
   def card_number(cards)
     num=cards.collect do |i|
@@ -1482,7 +1480,7 @@ class Scene_Poker < Scene_Base
     return num
   end
   #--------------------------------------------------------------------------
-  # œ ƒGƒlƒ~[‚ÌƒR[ƒ‹
+  # â— ã‚¨ãƒãƒŸãƒ¼ã®ã‚³ãƒ¼ãƒ«
   #--------------------------------------------------------------------------
   def enemy_call
     Audio.se_play("Audio/SE/coin")
@@ -1492,12 +1490,12 @@ class Scene_Poker < Scene_Base
     next_turn
   end
   #--------------------------------------------------------------------------
-  # œ ƒGƒlƒ~[‚ÌƒŒƒCƒYiAIj
+  # â— ã‚¨ãƒãƒŸãƒ¼ã®ãƒ¬ã‚¤ã‚ºï¼ˆAIï¼‰
   #--------------------------------------------------------------------------
   def enemy_raise
     Audio.se_play("Audio/SE/coin")
     Audio.se_play("Audio/SE/Wind2")
-    raise=@for_call+[evaluation_enemy_hand+rand(9)+1,50].max#Žb’è
+    raise=@for_call+[evaluation_enemy_hand+rand(9)+1,50].max#æš«å®š
     enemy_send_pot(raise)
     @for_call=raise
     @help_window.set_text(sprintf(Vocab::PokerRaise,@enemy_name,raise))
@@ -1505,7 +1503,7 @@ class Scene_Poker < Scene_Base
     next_turn
   end
   #--------------------------------------------------------------------------
-  # œ ƒGƒlƒ~[‚ÌƒR[ƒ‹‚©ƒŒƒCƒY‚©iAIjiŽb’èj
+  # â— ã‚¨ãƒãƒŸãƒ¼ã®ã‚³ãƒ¼ãƒ«ã‹ãƒ¬ã‚¤ã‚ºã‹ï¼ˆAIï¼‰ï¼ˆæš«å®šï¼‰
   #--------------------------------------------------------------------------
   def enemy_call_or_raise
     p evaluation_for_enemy
@@ -1520,7 +1518,7 @@ class Scene_Poker < Scene_Base
     end
   end
   #--------------------------------------------------------------------------
-  # œ ƒGƒlƒ~[‚Ìƒrƒbƒh‚©ƒhƒƒbƒv‚©iAIjiŽb’èj
+  # â— ã‚¨ãƒãƒŸãƒ¼ã®ãƒ“ãƒƒãƒ‰ã‹ãƒ‰ãƒ­ãƒƒãƒ—ã‹ï¼ˆAIï¼‰ï¼ˆæš«å®šï¼‰
   #--------------------------------------------------------------------------
   def enemy_bit_or_drop
     if @input.betting>2200 && evaluation_enemy_hand < 20
@@ -1530,7 +1528,7 @@ class Scene_Poker < Scene_Base
     end
   end
   #--------------------------------------------------------------------------
-  # œ ƒGƒlƒ~[‚ªƒhƒƒbƒv‚·‚é
+  # â— ã‚¨ãƒãƒŸãƒ¼ãŒãƒ‰ãƒ­ãƒƒãƒ—ã™ã‚‹
   #--------------------------------------------------------------------------
   def enemy_drop
     @help_window.set_text(sprintf(Vocab::PokerEnemyDrop,@enemy_name))
@@ -1547,26 +1545,26 @@ class Scene_Poker < Scene_Base
     continue?
   end
   #--------------------------------------------------------------------------
-  # œ “G‚Ìs“®‚Ì‚½‚ß‚ÌƒAƒNƒ^[‚Ì‹­‹C‚³•]‰¿
+  # â— æ•µã®è¡Œå‹•ã®ãŸã‚ã®ã‚¢ã‚¯ã‚¿ãƒ¼ã®å¼·æ°—ã•è©•ä¾¡
   #--------------------------------------------------------------------------
   def evaluation_for_enemy
-    #ƒAƒNƒ^[‚ª•Ï‚¦‚½ƒJ[ƒh‚Ì–‡”‚à•]‰¿‚·‚éB
-    #‚T–‡‚·‚×‚Ä•Ï‚¦‚½‚ç‚O“_‚Æ‚·‚éB
-    #ƒAƒNƒ^[‚ÌŽ©M‚ðƒJ[ƒh‚ð•Ï‚¦‚½–‡”‚âƒrƒbƒh‚âƒŒƒCƒY‚ÌŠz‚©‚ç”»’f‚µA
-    #ƒGƒlƒ~[Ž©g‚ÌƒJ[ƒh‚Ì‹­‚³‚à•]‰¿‚·‚é
+    #ã‚¢ã‚¯ã‚¿ãƒ¼ãŒå¤‰ãˆãŸã‚«ãƒ¼ãƒ‰ã®æžšæ•°ã‚‚è©•ä¾¡ã™ã‚‹ã€‚
+    #ï¼•æžšã™ã¹ã¦å¤‰ãˆãŸã‚‰ï¼ç‚¹ã¨ã™ã‚‹ã€‚
+    #ã‚¢ã‚¯ã‚¿ãƒ¼ã®è‡ªä¿¡ã‚’ã‚«ãƒ¼ãƒ‰ã‚’å¤‰ãˆãŸæžšæ•°ã‚„ãƒ“ãƒƒãƒ‰ã‚„ãƒ¬ã‚¤ã‚ºã®é¡ã‹ã‚‰åˆ¤æ–­ã—ã€
+    #ã‚¨ãƒãƒŸãƒ¼è‡ªèº«ã®ã‚«ãƒ¼ãƒ‰ã®å¼·ã•ã‚‚è©•ä¾¡ã™ã‚‹
     @actor_level=100-@a_change_times*20
     @actor_level=@actor_level+@actor_bet/9
     return @actor_level-evaluation_enemy_hand
   end
   #--------------------------------------------------------------------------
-  # œ ƒGƒlƒ~[‚ÌŽè‚ð•]‰¿‚·‚é
+  # â— ã‚¨ãƒãƒŸãƒ¼ã®æ‰‹ã‚’è©•ä¾¡ã™ã‚‹
   #--------------------------------------------------------------------------
   def evaluation_enemy_hand
     cards=@enemy
     flash=aim_flash(cards)
     straight=aim_straight(cards)
 
-    #ƒrƒbƒh‚âƒŒƒCƒY‚ÌŠz‚ÌÝ’è‚ÉŽg‚í‚ê‚é‚½‚ßA–ð‚Æ–ð‚ÌŠÔ‚Ì“_”‚³‚ðL‚°‰ß‚¬‚é‚ÆƒoƒŒƒoƒŒ‚É‚È‚é
+    #ãƒ“ãƒƒãƒ‰ã‚„ãƒ¬ã‚¤ã‚ºã®é¡ã®è¨­å®šã«ä½¿ã‚ã‚Œã‚‹ãŸã‚ã€å½¹ã¨å½¹ã®é–“ã®ç‚¹æ•°ã•ã‚’åºƒã’éŽãŽã‚‹ã¨ãƒãƒ¬ãƒãƒ¬ã«ãªã‚‹
     return 80 if royal_straight_flash?(cards)
     return 80 if are_cards_flash?(cards) && are_cards_straight?(cards)
     return 70 if same_number_count(cards).include?(4)
@@ -1581,7 +1579,7 @@ class Scene_Poker < Scene_Base
     return 0
   end
   #--------------------------------------------------------------------------
-  # œ ƒGƒlƒ~[‚ÌƒxƒbƒgiAIj
+  # â— ã‚¨ãƒãƒŸãƒ¼ã®ãƒ™ãƒƒãƒˆï¼ˆAIï¼‰
   #--------------------------------------------------------------------------
   def enemy_bit
     evaluation_for_enemy
@@ -1593,24 +1591,24 @@ class Scene_Poker < Scene_Base
     next_turn
   end
   #--------------------------------------------------------------------------
-  # œ ƒGƒlƒ~[‚ÌƒJ[ƒh‚ð•Ï‚¦‚éiAIj
+  # â— ã‚¨ãƒãƒŸãƒ¼ã®ã‚«ãƒ¼ãƒ‰ã‚’å¤‰ãˆã‚‹ï¼ˆAIï¼‰
   #--------------------------------------------------------------------------
   def change_enemy_card
-    #Œ»Ý‚ÌŽèŽ‚¿‚ÌƒJ[ƒh‚ð‚Ý‚ÄAŠî–{“I‚É‚R–‡ˆÈã‚ÌŽíƒJ[ƒh‚ª‚ ‚ê‚Î
-    #‚»‚ÌŒ`‚ð–ÚŽw‚·
+    #ç¾åœ¨ã®æ‰‹æŒã¡ã®ã‚«ãƒ¼ãƒ‰ã‚’ã¿ã¦ã€åŸºæœ¬çš„ã«ï¼“æžšä»¥ä¸Šã®ç¨®ã‚«ãƒ¼ãƒ‰ãŒã‚ã‚Œã°
+    #ãã®å½¢ã‚’ç›®æŒ‡ã™
     cards=@enemy
     flash=aim_flash(cards)
     straight=aim_straight(cards)
 
     if two_card?(cards) || same_number_count(cards).include?(2) || same_number_count(cards).include?(3)
-      #ƒc[ƒyƒA‚©ƒƒ“ƒyƒAAƒXƒŠ[ƒJ[ƒh‚ª‚·‚Å‚É¬—§‚µ‚Ä‚éê‡‚Íƒtƒ‰ƒbƒVƒ…‘_‚¢‚æ‚è—Dæ
+      #ãƒ„ãƒ¼ãƒšã‚¢ã‹ãƒ¯ãƒ³ãƒšã‚¢ã€ã‚¹ãƒªãƒ¼ã‚«ãƒ¼ãƒ‰ãŒã™ã§ã«æˆç«‹ã—ã¦ã‚‹å ´åˆã¯ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ç‹™ã„ã‚ˆã‚Šå„ªå…ˆ
       normal_action(cards)
     elsif flash[1]>=3
-      p flash[0]+"‚Ìƒtƒ‰ƒbƒVƒ…‚ð‘_‚¤" if flash[1]>=3
+      p flash[0]+"ã®ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã‚’ç‹™ã†" if flash[1]>=3
       @e_reverse.size.times {|w| @e_reverse[w]=true if flash[0] != @enemy[w][0] }
     elsif straight.size>=3
-      p "ƒXƒgƒŒ[ƒg‚ð–ÚŽw‚·"
-      #ƒXƒgƒŒ[ƒg‚ÌŽí‚Å‚È‚¢ê‡‚ÍŽÌ‚Ä‚é
+      p "ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆã‚’ç›®æŒ‡ã™"
+      #ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆã®ç¨®ã§ãªã„å ´åˆã¯æ¨ã¦ã‚‹
       @e_reverse.size.times {|w| @e_reverse[w]=true if !straight.include?(card_number(cards)[w]) }
     else
       normal_action(cards)
@@ -1633,9 +1631,9 @@ class Scene_Poker < Scene_Base
     next_turn
   end
   #--------------------------------------------------------------------------
-  # œ ƒtƒ‰ƒbƒVƒ…
+  # â— ãƒ•ãƒ©ãƒƒã‚·ãƒ¥
   #--------------------------------------------------------------------------
-  # ðŒF“¯Ží‚ÌƒJ[ƒh‚ª‚R–‡ˆÈã‚ ‚é‚Æ‚«
+  # æ¡ä»¶ï¼šåŒç¨®ã®ã‚«ãƒ¼ãƒ‰ãŒï¼“æžšä»¥ä¸Šã‚ã‚‹ã¨ã
   #--------------------------------------------------------------------------
   def aim_flash(cards)
     flash=Marshal.load(Marshal.dump(cards))
@@ -1646,9 +1644,9 @@ class Scene_Poker < Scene_Base
     return a
   end
   #--------------------------------------------------------------------------
-  # œ ƒXƒgƒŒ[ƒg”»’è
+  # â— ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆåˆ¤å®š
   #--------------------------------------------------------------------------
-  # yðŒzŠK’i‚É‚È‚Á‚Ä‚¢‚éƒJ[ƒh‚ª‚R–‡ˆÈã‚ ‚é‚Æ‚«
+  # ã€æ¡ä»¶ã€‘éšŽæ®µã«ãªã£ã¦ã„ã‚‹ã‚«ãƒ¼ãƒ‰ãŒï¼“æžšä»¥ä¸Šã‚ã‚‹ã¨ã
   #--------------------------------------------------------------------------
   def aim_straight(cards)
     straight=card_number(cards)
@@ -1660,52 +1658,52 @@ class Scene_Poker < Scene_Base
     return @a
   end
   #--------------------------------------------------------------------------
-  # œ ’Êíˆ—
+  # â— é€šå¸¸å‡¦ç†
   #--------------------------------------------------------------------------
-  # ƒyƒAˆÈŠO‚ÌƒJ[ƒh‚ðŽÌ‚Ä‚é
+  # ãƒšã‚¢ä»¥å¤–ã®ã‚«ãƒ¼ãƒ‰ã‚’æ¨ã¦ã‚‹
   #--------------------------------------------------------------------------
   def normal_action(cards)
     if are_cards_flash?(cards) || are_cards_straight?(cards) || are_cards_fullhouse?(cards)
-      #ƒtƒ‰ƒbƒVƒ…‚©ƒXƒgƒŒ[ƒg‚Æƒtƒ‹ƒnƒEƒX‚ªŠù‚É‚Å‚«‚Ä‚é‚È‚ç‰½‚à‚µ‚È‚¢
+      #ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ã‹ã‚¹ãƒˆãƒ¬ãƒ¼ãƒˆã¨ãƒ•ãƒ«ãƒã‚¦ã‚¹ãŒæ—¢ã«ã§ãã¦ã‚‹ãªã‚‰ä½•ã‚‚ã—ãªã„
     elsif two_card?(cards) && !same_number_count(cards).include?(3)
-      #ŒÇ—§‚µ‚Ä‚¢‚éƒJ[ƒh‚ðŽÌ‚Ä‚é
-      p "ƒc[ƒyƒA‚Å‚ ‚é"
+      #å­¤ç«‹ã—ã¦ã„ã‚‹ã‚«ãƒ¼ãƒ‰ã‚’æ¨ã¦ã‚‹
+      p "ãƒ„ãƒ¼ãƒšã‚¢ã§ã‚ã‚‹"
       @e_reverse.size.times {|w| @e_reverse[w]=true if same_number_count(cards)[w] <= 1 }
     elsif same_number_count(cards).include?(3)
-      p "ƒXƒŠ[ƒJ[ƒh‚Å‚ ‚é"
-      #ŒÇ—§‚µ‚Ä‚¢‚éÅ‚à¬‚³‚¢ƒJ[ƒh‚ðˆê–‡ŽÌ‚Ä‚é
+      p "ã‚¹ãƒªãƒ¼ã‚«ãƒ¼ãƒ‰ã§ã‚ã‚‹"
+      #å­¤ç«‹ã—ã¦ã„ã‚‹æœ€ã‚‚å°ã•ã„ã‚«ãƒ¼ãƒ‰ã‚’ä¸€æžšæ¨ã¦ã‚‹
       @e_reverse.size.times {|w| 
       if card_number(cards)[w]==card_number(cards).min && same_number_count(cards)[w] <= 1
         @e_reverse[w]=true
         break
       end}
     else
-      #ŒÇ—§‚µ‚Ä‚¢‚é‚P‚OˆÈ‰º‚ÌƒJ[ƒh‚ð‘S‚ÄŽÌ‚Ä‚é
-      p "ŒÇ—§‚µ‚Ä‚¢‚é‚P‚OˆÈ‰º‚ÌƒJ[ƒh‚ð‘S‚ÄŽÌ‚Ä‚é"
+      #å­¤ç«‹ã—ã¦ã„ã‚‹ï¼‘ï¼ä»¥ä¸‹ã®ã‚«ãƒ¼ãƒ‰ã‚’å…¨ã¦æ¨ã¦ã‚‹
+      p "å­¤ç«‹ã—ã¦ã„ã‚‹ï¼‘ï¼ä»¥ä¸‹ã®ã‚«ãƒ¼ãƒ‰ã‚’å…¨ã¦æ¨ã¦ã‚‹"
       @e_reverse.size.times {|w| @e_reverse[w]=true if card_number(cards)[w]<=10 && same_number_count(cards)[w] <= 1 }
     end
   end
   #--------------------------------------------------------------------------
-  # œ ƒc[ƒyƒA‚©H
+  # â— ãƒ„ãƒ¼ãƒšã‚¢ã‹ï¼Ÿ
   #--------------------------------------------------------------------------
   def two_card?(cards)
     return card_number(cards).uniq.size==3
   end
   #--------------------------------------------------------------------------
-  # œ ƒV[ƒ“‘JˆÚ‚Ì‰Â”\”»’è
+  # â— ã‚·ãƒ¼ãƒ³é·ç§»ã®å¯èƒ½åˆ¤å®š
   #--------------------------------------------------------------------------
   def scene_change_ok?
     !$game_message.busy? && !$game_message.visible
   end
   #--------------------------------------------------------------------------
-  # œ ƒtƒŒ[ƒ€XV
+  # â— ãƒ•ãƒ¬ãƒ¼ãƒ æ›´æ–°
   #--------------------------------------------------------------------------
   def update
     super
     input_cursor
   end
   #--------------------------------------------------------------------------
-  # œ ƒJ[ƒ\ƒ‹”»’è
+  # â— ã‚«ãƒ¼ã‚½ãƒ«åˆ¤å®š
   #--------------------------------------------------------------------------
   def input_cursor
     if @input.active == true && @input.visible && @input.openness==255 && Input.trigger?(:B)
@@ -1760,7 +1758,7 @@ class Scene_Poker < Scene_Base
     end
   end
   #--------------------------------------------------------------------------
-  # œ ƒAƒNƒ^[ƒJ[ƒhƒ`ƒFƒ“ƒW
+  # â— ã‚¢ã‚¯ã‚¿ãƒ¼ã‚«ãƒ¼ãƒ‰ãƒã‚§ãƒ³ã‚¸
   #--------------------------------------------------------------------------
   def a_card_change
     @card_index=-1
@@ -1789,7 +1787,7 @@ class Scene_Poker < Scene_Base
     next_turn
   end
   #--------------------------------------------------------------------------
-  # œ ƒAƒNƒ^[‚ÌƒJ[ƒh‚ð‚Ð‚Á‚­‚è•Ô‚·
+  # â— ã‚¢ã‚¯ã‚¿ãƒ¼ã®ã‚«ãƒ¼ãƒ‰ã‚’ã²ã£ãã‚Šè¿”ã™
   #--------------------------------------------------------------------------
   def a_turn_card(index)
     play_card
@@ -1809,13 +1807,13 @@ class Scene_Poker < Scene_Base
     end
   end
   #--------------------------------------------------------------------------
-  # œ ”wŒi‚Ì‰ð•ú
+  # â— èƒŒæ™¯ã®è§£æ”¾
   #--------------------------------------------------------------------------
   def dispose_background
     @background_sprite.dispose
   end
   #--------------------------------------------------------------------------
-  # œ I—¹ˆ—
+  # â— çµ‚äº†å‡¦ç†
   #--------------------------------------------------------------------------
   def terminate
     super
@@ -1823,7 +1821,7 @@ class Scene_Poker < Scene_Base
     dispose_sprites
   end
   #--------------------------------------------------------------------------
-  # œ ”wŒi‚Ì‰ð•ú
+  # â— èƒŒæ™¯ã®è§£æ”¾
   #--------------------------------------------------------------------------
   def dispose_sprites
     @message_window.dispose
@@ -1831,15 +1829,15 @@ class Scene_Poker < Scene_Base
 end
 
 #==============================================================================
-# ¡ Game_Interpreter
+# â–  Game_Interpreter
 #------------------------------------------------------------------------------
-# @ƒCƒxƒ“ƒgƒRƒ}ƒ“ƒh‚ðŽÀs‚·‚éƒCƒ“ƒ^ƒvƒŠƒ^‚Å‚·B‚±‚ÌƒNƒ‰ƒX‚Í Game_Map ƒNƒ‰ƒXA
-# Game_Troop ƒNƒ‰ƒXAGame_Event ƒNƒ‰ƒX‚Ì“à•”‚ÅŽg—p‚³‚ê‚Ü‚·B
+# ã€€ã‚¤ãƒ™ãƒ³ãƒˆã‚³ãƒžãƒ³ãƒ‰ã‚’å®Ÿè¡Œã™ã‚‹ã‚¤ãƒ³ã‚¿ãƒ—ãƒªã‚¿ã§ã™ã€‚ã“ã®ã‚¯ãƒ©ã‚¹ã¯ Game_Map ã‚¯ãƒ©ã‚¹ã€
+# Game_Troop ã‚¯ãƒ©ã‚¹ã€Game_Event ã‚¯ãƒ©ã‚¹ã®å†…éƒ¨ã§ä½¿ç”¨ã•ã‚Œã¾ã™ã€‚
 #==============================================================================
 
 class Game_Interpreter
   #--------------------------------------------------------------------------
-  # œ ƒ|[ƒJ[‰æ–Ê‚ðŒÄ‚Ño‚·
+  # â— ãƒãƒ¼ã‚«ãƒ¼ç”»é¢ã‚’å‘¼ã³å‡ºã™
   #--------------------------------------------------------------------------
   def call_poker(name,face_name,face_index,ante,bgm="Battle5")
     SceneManager.call(Scene_BeforePoker)
