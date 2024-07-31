@@ -2,7 +2,7 @@
  * ===========================================================================
  * KanjiPartyChange.js
  * ---------------------------------------------------------------------------
- * version 1.05
+ * version 1.1.0
  * Copyright (c) 2020 Kanji the Grass
  * This work is provided under the MTCM Blue License
  * - https://ja.materialcommons.org/mtcm-b-summary/
@@ -11,6 +11,48 @@
 */
 
 /*:
+ * @command start
+ * 
+ * 
+ * @command add
+ * 
+ * @arg actors
+ * @type actor[]
+ * @default []
+ * 
+ * 
+ * @command del
+ * 
+ * @arg actors
+ * @type actor[]
+ * @default []
+ * 
+ * 
+ * @command lock
+ * 
+ * @arg actors
+ * @type actor[]
+ * @default []
+ * 
+ * 
+ * @command unlock
+ * 
+ * @arg actors
+ * @type actor[]
+ * @default []
+ * 
+ * 
+ * @command clear
+ * 
+ * 
+ * @command changeMaxParty
+ * 
+ * @arg partySize
+ * @type number
+ * @default 1
+ * 
+ * 
+ * 
  * @plugindesc Provides a scene for switching party actors between.
  * @author Kanji the Grass
  *
@@ -457,6 +499,48 @@
  */
 
 /*:ja
+ * @command start
+ * 
+ * 
+ * @command add
+ * 
+ * @arg actors
+ * @type actor[]
+ * @default []
+ * 
+ * 
+ * @command del
+ * 
+ * @arg actors
+ * @type actor[]
+ * @default []
+ * 
+ * 
+ * @command lock
+ * 
+ * @arg actors
+ * @type actor[]
+ * @default []
+ * 
+ * 
+ * @command unlock
+ * 
+ * @arg actors
+ * @type actor[]
+ * @default []
+ * 
+ * 
+ * @command clear
+ * 
+ * 
+ * @command changeMaxParty
+ * 
+ * @arg partySize
+ * @type number
+ * @default 1
+ * 
+ * 
+ * 
  * @plugindesc 待機メンバーと入れ替えるシーンを追加します
  * @author 莞爾の草
  *
@@ -930,16 +1014,27 @@ const KanjiPartyChange = {
     exports: {},
     _commands: {},
     registerCommand(name, args) {
+        if (Utils.RPGMAKER_NAME === 'MZ') {
+            PluginManager.registerCommand('KanjiPartyChange', name, args => {
+                this.executeCommand(name, args);
+            });
+        }
         this._commands[name] = args;
     },
-    executeCommand(args) {
-        const name = args[0];
-        if (this._commands[name]) {
-            this._commands[name].call(this, args);
-        } else {
-            throw new Error(`[${this.name}] invalid command(${args})`);
+    executeCommand(command, args) {
+        if (Utils.RPGMAKER_NAME === 'MZ') {
+            args = [command].concat(args);
+        }else{
+            command = args[0];
         }
-    }
+        if (this._commands[command]) {
+            this._commands[command].call(this, args);
+        } else {
+            throw new Error(`[KanjiPartyChange] invalid command(${args})`);
+        }
+    },
+    faceWidth(){ return Utils.RPGMAKER_NAME === 'MZ' ? ImageManager.faceWidth : Window_Base._faceWidth; },
+    faceHeight(){ return Utils.RPGMAKER_NAME === 'MZ' ? ImageManager.faceHeight : Window_Base._faceHeight; },
 };
 
 (function () {
@@ -1003,6 +1098,9 @@ const KanjiPartyChange = {
     // KanjiPartyChange
     //=================================================
     this._parseIdList = function(data) {
+        if (Utils.RPGMAKER_NAME === 'MZ') {
+            return JsonEx.parse(data.actors).map(n => Number(n));
+        }
         let list = data.match(/(\d+)(?:-(\d+))?/);
         if (list[2]) {
             var min = Number(list[1]), max = Number(list[2]);
@@ -1038,21 +1136,22 @@ const KanjiPartyChange = {
     });
 
     this.registerCommand('del', function(args) {
+        if (!$gameSystem._waitingMembers) $gameSystem._waitingMembers = [];
         for (var i = 1; args[i]; i++) {
             var data, m = this._parseIdList(args[i])
             for (var j = 0; data = m[j]; j++) {
-                $gameSystem._waitingMembers =
+                $gameSystem._waitingMembers = 
                 $gameSystem._waitingMembers.filter(id => { return id !== data });
             }
         }
     });
 
     this.registerCommand('lock', function(args) {
-        this._setLock(true, args);
+        this._setLock(args, true);
     });
 
     this.registerCommand('unlock', function(args) {
-        this._setLock(false, args);
+        this._setLock(args, false);
     });
 
     this.registerCommand('clear', function() {
@@ -1060,23 +1159,14 @@ const KanjiPartyChange = {
     });
 
     this.registerCommand('changeMaxParty', function(args) {
-        $gameSystem._kanjiPCMaxParty = Number(args[1]);
+        let num;
+        if (Utils.RPGMAKER_NAME === 'MZ') {
+            num = Number(args[1].partySize);
+        } else {
+            num = Number(args[1]);
+        }
+        $gameSystem._kanjiPCMaxParty = num;
     });
-
-    //=================================================
-    // WindowCompatibleMixin
-    //=================================================
-    this.WindowCompatibleMixin = {};
-
-    if (Utils.RPGMAKER_NAME === 'MZ') {
-        this.WindowCompatibleMixin.normalColor = function() {
-            return ColorManager.normalColor();
-        }
-
-        this.WindowCompatibleMixin.systemColor = function() {
-            return ColorManager.systemColor();
-        }
-    }
 
     //=================================================
     // Game_Interpreter
@@ -1084,7 +1174,7 @@ const KanjiPartyChange = {
     const __pluginCommand = Game_Interpreter.prototype.pluginCommand;
     Game_Interpreter.prototype.pluginCommand = function (command, args) {
         __pluginCommand.call(this, command, args);
-        if (command === 'kanjiPC') { KanjiPartyChange.executeCommand(args) }
+        if (command === 'kanjiPC') { KanjiPartyChange.executeCommand(command, args) }
     };
 
     //=================================================
@@ -1188,7 +1278,7 @@ const KanjiPartyChange = {
     };
 
     Window_PCActorList.prototype.itemHeight = function() {
-        return this.contentsHeight();
+        return Utils.RPGMAKER_NAME === 'MZ' ? this.innerHeight : this.contentsHeight();
     };
 
     Window_PCActorList.prototype.maxItems = function() {
@@ -1261,8 +1351,8 @@ const KanjiPartyChange = {
                         this.drawText(actor.name(), rect.x+42, rect.y,rect.width);
                         break;
                     case "face":
-                        this.drawActorFace(actor, rect.x + rect.width - Window_Base._faceWidth,
-                            rect.y, Window_Base._faceWidth, rect.height);
+                        this.drawActorFace(actor, rect.x + rect.width - KanjiPartyChange.faceWidth(),
+                            rect.y, KanjiPartyChange.faceWidth(), rect.height);
                         this.drawText(actor.name(), rect.x, rect.y,rect.width);
                         break;
                     case "sideV":
@@ -1304,119 +1394,130 @@ const KanjiPartyChange = {
     //=================================================
     // Window_ActorInfo
     //=================================================
-    class Window_ActorInfo extends Window_Base {
-        parseRectangle(pos) {
-            var w = Graphics.boxWidth, h = Graphics.boxHeight;
-            return eval(pos);
+    function Window_ActorInfo () {
+        this.initialize.apply(this, arguments);
+    }
+
+    Window_ActorInfo.prototype = Object.create(
+        (Utils.RPGMAKER_NAME === 'MZ' ? Window_StatusBase : Window_Selectable).prototype
+    );
+    Window_ActorInfo.prototype.constructor = Window_ActorInfo;
+
+
+    Window_ActorInfo.prototype.parseRectangle = function(pos) {
+        var w = Graphics.boxWidth, h = Graphics.boxHeight;
+        return eval(pos);
+    }
+
+    Window_ActorInfo.prototype.refreshStatus = function(actor) {
+        if (Utils.RPGMAKER_NAME === 'MZ') {
+            this.refresh();
+        } else {
+            this.contents.clear();
         }
-        refreshStatus(actor) {
-            if (this) {
-                this.contents.clear();
-                if (actor) {
-                    let a, x, y;
+        if (!actor) {
+            return;
+        }
+        let a, x, y;
 
-                    this.contents.fontSize = 26;
-                    if (param.swFaceType !== "none") {
-                        const a = this.parseRectangle(param.facePos);
-                        switch (param.swFaceType) {
-                            case "walk":
-                                this.drawActorCharacter(actor, a[0] + Window_Base._faceWidth / 2,
-                                    a[1] + Window_Base._faceHeight - 8);
-                                break;
-                            case "face":
-                                this.drawActorFace(actor, a[0], a[1],
-                                    Window_Base._faceWidth, Window_Base._faceHeight);
-                                break;
-                            case "sideV":
-                                var bitmap = ImageManager.loadSvActor(actor.battlerName());
-                                var ww = bitmap.width / 9, hh = bitmap.height / 6
-                                this.contents.blt(bitmap, 0, 0, ww, hh,
-                                    a[0] + (Window_Base._faceWidth - ww) / 2, a[1] + (Window_Base._faceHeight - hh) / 2);
-                                break;
-                        }
-                    }
-                    if (param.nameShow) {
-                        const a = this.parseRectangle(param.namePos);
-                        this.drawActorName(actor, a[0], a[1], a[2] || 180);
-                    }
-                    if (param.classShow) {
-                        const a = this.parseRectangle(param.classPos);
-                        this.drawActorClass(actor, a[0], a[1], a[2] || 180);
-                    }
-                    if (param.levelShow) this._drawLevel(actor, ...this.parseRectangle(param.levelPos));
-                    a = this.parseRectangle(param.iconsPos);
-                    if (a[2]) this.drawActorIcons(actor, ...a);
-                    a = this.parseRectangle(param.hpPos);
-                    if (a[2]) this.drawActorHp(actor, ...a);
-                    a = this.parseRectangle(param.mpPos);
-                    if (a[2]) this.drawActorMp(actor, ...a);
-                    a = this.parseRectangle(param.tpPos);
-                    if (a[2]) this.drawActorTp(actor, ...a);
-
-                    this.contents.paintOpacity = 48;
-                    a = this.parseRectangle(param.horzLineYPos);
-                    for (var i = 0; i < a.length; i++) {
-                        this.contents.fillRect(0, a[i], this.contentsWidth(), 2, this.normalColor());
-                    };
-                    this.contents.paintOpacity = 255;
-
-                    if (param.equipShow) {
-                        let a = this.parseRectangle(param.equipPos), x = a[0], y = a[1];
-                        const slots = actor.equips();
-                        actor.equipSlots().forEach(function(slotId, index){
-                            this.changeTextColor(this.systemColor());
-                            this.drawText($dataSystem.equipTypes[slotId], x, y, 100, this.lineHeight());
-                            if (slots[index]){
-                                this.drawItemName(slots[index], x + 100, y, a[2] - 100);
-                            }
-                            y += param.equipRow;
-
-                        }, this);
-                    }
-                    if (param.statusShow) {
-                        let a = this.parseRectangle(param.statusPos), x = a[0], y = a[1] - param.statusRow;
-                        // ver.1.04変更
-                        let wid = Math.max(a[2] - 80, 68);
-                        const re = new RegExp("([XS]?)(\\d+)");
-                        for (var index = 0; index < param.paramListSW.length; index++) {
-                            y += param.statusRow;
-                            if (!re.test(param.paramListSW[index])) continue;
-                            this.changeTextColor(this.systemColor());
-
-                            var mode = RegExp.$1, num = parseInt(RegExp.$2), 
-                            paramName, paramValue, xPad = 0, percWid = this.textWidth(param.parcentStr);
-                            if (mode == 'X') {
-                                paramName  = param.xParamNames[num];
-                                paramValue = actor.xparam(num);
-                                xPad = percWid;
-                            }else if (mode == 'S'){
-                                paramName  = param.sParamNames[num];
-                                paramValue = actor.sparam(num);
-                                xPad = percWid;
-                            }else{
-                                paramName  = TextManager.param(num);
-                                paramValue = actor.param(num);
-                            }
-                            if (xPad) {
-                                paramValue = parseInt(paramValue * 100);
-                                this.drawText(param.parcentStr, x, y, a[2], 'right');
-                            }
-
-                            this.drawText(paramName, x, y, wid);
-                            this.resetTextColor();
-                            this.drawText(paramValue, x-xPad, y, a[2], 'right');
-                        }
-                        // ver.1.04変更ここまで
-                    }
-                }
+        this.contents.fontSize = 26;
+        if (param.swFaceType !== "none") {
+            const a = this.parseRectangle(param.facePos);
+            switch (param.swFaceType) {
+                case "walk":
+                    this.drawActorCharacter(actor, a[0] + KanjiPartyChange.faceWidth() / 2, a[1] + KanjiPartyChange.faceHeight() - 8);
+                    break;
+                case "face":
+                    this.drawActorFace(actor, a[0], a[1], KanjiPartyChange.faceWidth(), KanjiPartyChange.faceHeight());
+                    break;
+                case "sideV":
+                    var bitmap = ImageManager.loadSvActor(actor.battlerName());
+                    var ww = bitmap.width / 9, hh = bitmap.height / 6
+                    this.contents.blt(bitmap, 0, 0, ww, hh,
+                        a[0] + (KanjiPartyChange.faceWidth() - ww) / 2, a[1] + (KanjiPartyChange.faceHeight() - hh) / 2);
+                    break;
             }
         }
-        _drawLevel(actor, x, y, width=120) {
-            this.changeTextColor(this.systemColor());
-            this.drawText(TextManager.levelA, x, y, 48);
-            this.resetTextColor();
-            this.drawText(actor.level, x, y, width, 'right');
+        if (param.nameShow) {
+            const a = this.parseRectangle(param.namePos);
+            this.drawActorName(actor, a[0], a[1], a[2] || 180);
         }
+        if (param.classShow) {
+            const a = this.parseRectangle(param.classPos);
+            this.drawActorClass(actor, a[0], a[1], a[2] || 180);
+        }
+        if (param.levelShow) this._drawLevel(actor, ...this.parseRectangle(param.levelPos));
+        a = this.parseRectangle(param.iconsPos);
+        if (a[2]) this.drawActorIcons(actor, ...a);
+        a = this.parseRectangle(param.hpPos);
+        if (a[2]) this.drawActorHp(actor, ...a);
+        a = this.parseRectangle(param.mpPos);
+        if (a[2]) this.drawActorMp(actor, ...a);
+        a = this.parseRectangle(param.tpPos);
+        if (a[2]) this.drawActorTp(actor, ...a);
+
+        this.contents.paintOpacity = 48;
+        a = this.parseRectangle(param.horzLineYPos);
+        for (var i = 0; i < a.length; i++) {
+            this.contents.fillRect(0, a[i], this.contentsWidth(), 2, this.normalColor());
+        };
+        this.contents.paintOpacity = 255;
+
+        if (param.equipShow) {
+            let a = this.parseRectangle(param.equipPos), x = a[0], y = a[1];
+            const slots = actor.equips();
+            actor.equipSlots().forEach(function(slotId, index){
+                this.changeTextColor(this.systemColor());
+                this.drawText($dataSystem.equipTypes[slotId], x, y, 100, this.lineHeight());
+                if (slots[index]){
+                    this.drawItemName(slots[index], x + 100, y, a[2] - 100);
+                }
+                y += param.equipRow;
+
+            }, this);
+        }
+        if (param.statusShow) {
+            let a = this.parseRectangle(param.statusPos), x = a[0], y = a[1] - param.statusRow;
+            // ver.1.04変更
+            let wid = Math.max(a[2] - 80, 68);
+            const re = new RegExp("([XS]?)(\\d+)");
+            for (var index = 0; index < param.paramListSW.length; index++) {
+                y += param.statusRow;
+                if (!re.test(param.paramListSW[index])) continue;
+                this.changeTextColor(this.systemColor());
+
+                var mode = RegExp.$1, num = parseInt(RegExp.$2), 
+                paramName, paramValue, xPad = 0, percWid = this.textWidth(param.parcentStr);
+                if (mode == 'X') {
+                    paramName  = param.xParamNames[num];
+                    paramValue = actor.xparam(num);
+                    xPad = percWid;
+                }else if (mode == 'S'){
+                    paramName  = param.sParamNames[num];
+                    paramValue = actor.sparam(num);
+                    xPad = percWid;
+                }else{
+                    paramName  = TextManager.param(num);
+                    paramValue = actor.param(num);
+                }
+                if (xPad) {
+                    paramValue = parseInt(paramValue * 100);
+                    this.drawText(param.parcentStr, x, y, a[2], 'right');
+                }
+
+                this.drawText(paramName, x, y, wid);
+                this.resetTextColor();
+                this.drawText(paramValue, x-xPad, y, a[2], 'right');
+            }
+            // ver.1.04変更ここまで
+        }
+    }
+
+    Window_ActorInfo.prototype._drawLevel = function(actor, x, y, width=120) {
+        this.changeTextColor(this.systemColor());
+        this.drawText(TextManager.levelA, x, y, 48);
+        this.resetTextColor();
+        this.drawText(actor.level, x, y, width, 'right');
     }
 
     //=================================================
@@ -1462,7 +1563,7 @@ const KanjiPartyChange = {
         var w = Graphics.boxWidth, h = Graphics.boxHeight;
         const rect = eval(param);
         if (Utils.RPGMAKER_NAME === 'MZ') {
-            return [new Rectangle(rect)];
+            return [new Rectangle(...rect)];
         } else {
             return rect;
         }
@@ -1560,9 +1661,8 @@ const KanjiPartyChange = {
     }
 
     Scene_KanjiPartyChange.prototype.commandCancelActor = function () {
-        this.commandWindow.activate();
-        this.statusWindow.contents.clear();
         this.actorListWindow.select(-1);
+        this.commandWindow.activate();
     }
 
     // Window_ReserveMember
@@ -1611,8 +1711,35 @@ const KanjiPartyChange = {
         Window_ReserveMember,
         Window_ActorInfo,
     ]).forEach(function(klass){
-        console.log(this.WindowCompatibleMixin);
-        Object.assign(klass.prototype, this.WindowCompatibleMixin);
+        if (Utils.RPGMAKER_NAME === 'MZ') {
+            klass.prototype.normalColor = function() {
+                return ColorManager.normalColor();
+            }
+    
+            klass.prototype.systemColor = function() {
+                return ColorManager.systemColor();
+            }
+    
+            klass.prototype.drawActorCharacter = function(actor, x, y) {
+                this.drawCharacter(actor.characterName(), actor.characterIndex(), x, y);
+            }
+    
+            klass.prototype.drawActorFace = function(actor, x, y, width, height) {
+                this.drawFace(actor.faceName(), actor.faceIndex(), x, y, width, height);
+            }
+
+            klass.prototype.drawActorHp = function(actor, x, y, w){
+                Window_StatusBase.prototype.placeGauge.call(this, actor, 'hp', x, y, w);
+            };
+    
+            klass.prototype.drawActorMp = function(actor, x, y, w){
+                Window_StatusBase.prototype.placeGauge.call(this, actor, 'mp', x, y, w);
+            };
+    
+            klass.prototype.drawActorTp = function(actor, x, y, w){
+                Window_StatusBase.prototype.placeGauge.call(this, actor, 'tp', x, y, w);
+            };
+        }
     }, this);
 
     Object.assign(this.exports, {
