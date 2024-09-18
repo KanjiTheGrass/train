@@ -1035,6 +1035,10 @@ const KanjiPartyChange = {
     },
     faceWidth(){ return Utils.RPGMAKER_NAME === 'MZ' ? ImageManager.faceWidth : Window_Base._faceWidth; },
     faceHeight(){ return Utils.RPGMAKER_NAME === 'MZ' ? ImageManager.faceHeight : Window_Base._faceHeight; },
+    parseRectangle: function(pos) {
+        var w = Graphics.boxWidth, h = Graphics.boxHeight;
+        return pos ? eval(pos).map(n => typeof n === 'number' ? n : eval(n)) : null;
+    },
 };
 
 (function () {
@@ -1405,8 +1409,7 @@ const KanjiPartyChange = {
 
 
     Window_ActorInfo.prototype.parseRectangle = function(pos) {
-        var w = Graphics.boxWidth, h = Graphics.boxHeight;
-        return eval(pos);
+        return KanjiPartyChange.parseRectangle(pos);
     }
 
     Window_ActorInfo.prototype.refreshStatus = function(actor) {
@@ -1560,8 +1563,7 @@ const KanjiPartyChange = {
     }
 
     Scene_KanjiPartyChange.prototype.parseRectangle = function(param) {
-        var w = Graphics.boxWidth, h = Graphics.boxHeight;
-        const rect = eval(param);
+        const rect = KanjiPartyChange.parseRectangle(param);
         if (Utils.RPGMAKER_NAME === 'MZ') {
             return [new Rectangle(...rect)];
         } else {
@@ -1580,17 +1582,7 @@ const KanjiPartyChange = {
     }
 
     Scene_KanjiPartyChange.prototype.createActorListWindow = function () {
-        let rect = [
-            this.commandWindow.width,
-            0,
-            Graphics.boxWidth - this.commandWindow.width,
-            this.commandWindow.height
-        ];
-        if (Utils.RPGMAKER_NAME === 'MZ') {
-            this.actorListWindow = new Window_PCActorList(new Rectangle(...rect));
-        } else {
-            this.actorListWindow = new Window_PCActorList(...rect);
-        }
+        this.actorListWindow = new Window_PCActorList(...this.parseRectangle(param.pwPos));
         this.actorListWindow.setHandler('ok',     this.commandChangeActor.bind(this));
         this.actorListWindow.setHandler('cancel', this.commandCancelActor.bind(this));
         this.addWindow(this.actorListWindow);
