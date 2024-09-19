@@ -11,6 +11,7 @@
 */
 
 /*:
+ * @target MV MZ
  * @command start
  * 
  * 
@@ -499,43 +500,55 @@
  */
 
 /*:ja
+ * @target MV MZ
  * @command start
- * 
+ * @text パーティ編成画面を開く
  * 
  * @command add
+ * @text 待機メンバー追加
  * 
  * @arg actors
+ * @text アクター群
  * @type actor[]
  * @default []
  * 
  * 
  * @command del
+ * @text 待機メンバー削除
  * 
  * @arg actors
+ * @text アクター群
  * @type actor[]
  * @default []
  * 
  * 
  * @command lock
+ * @text アクターのパーティ変更禁止
  * 
  * @arg actors
+ * @text アクター群
  * @type actor[]
  * @default []
  * 
  * 
  * @command unlock
+ * @text アクターのパーティ変更許可
  * 
  * @arg actors
+ * @text アクター群
  * @type actor[]
  * @default []
  * 
  * 
  * @command clear
+ * @text 待機メンバー全削除
  * 
  * 
  * @command changeMaxParty
+ * @text パーティー最大人数変更
  * 
  * @arg partySize
+ * @text 最大人数
  * @type number
  * @default 1
  * 
