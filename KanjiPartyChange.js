@@ -120,6 +120,12 @@
  * @option center
  * @option right
  *
+ * @param mcLineHeight
+ * @parent layoutCW
+ * @text line height
+ * @type number
+ * @default 36
+ *
  * @param changeTerm
  * @parent layoutCW
  * @type string
@@ -602,6 +608,12 @@
  * @param layoutCW
  * @text コマンドウィンドウ
  *
+ * @param mcLineHeight
+ * @parent layoutCW
+ * @text 項目の高さ
+ * @type number
+ * @default 36
+ *
  * @param CWpos
  * @parent layoutCW
  * @text 横・縦・幅・高さ
@@ -1063,6 +1075,7 @@ const KanjiPartyChange = {
     param.removeOnReserveTerm    = String(param['removeOnReserveTerm']),
     param.actorListColMax        = Number(param['actorListColMax']  || 4),
     param.maxBattleMembers       = Number(param['maxBattleMembers'] || 0)
+    param.mcLineHeight           = Number(param['mcLineHeight']) || 36;
     param.addThisIntoMenuCommand = eval(param['addThisIntoMenuCommand'] || false),
     param.partyChangeCommand     = String(param['partyChangeCommand'] || "パーティ編成"),
     param.cwPos = param['CWpos'] || "[0, 0, 250, 192]",
@@ -1280,6 +1293,14 @@ const KanjiPartyChange = {
         return param.alignmentOfCommand;
     };
 
+    Window_PCMainCommand.prototype.lineHeight = function() {
+        return param.mcLineHeight;
+    };
+
+    Window_PCMainCommand.prototype.itemHeight = function() {
+        return param.mcLineHeight;
+    };
+
     //=================================================
     // Window_PCActorList
     //=================================================
@@ -1393,7 +1414,7 @@ const KanjiPartyChange = {
         var n = characterIndex;
         var sx = (n % 4 * 3 + 1) * pw;
         var sy = (Math.floor(n / 4) * 4) * ph;
-        this.contents.blt(bitmap, sx, sy, pw, this.itemHeight(), x - pw / 2, y);
+        this.contents.blt(bitmap, sx, sy, pw, Math.min(ph, this.itemHeight()), x - pw / 2, y);
     };
 
     Window_ReserveMember.prototype.lineHeight = function () {
